@@ -6,10 +6,16 @@
 * Methodical yet creative and having a proven ability for effective problem-solving.
 
 
+### Skills & Tools
+`Golang` `gRPC` `Protocol Buffers`
+
+`Kubernetes` `Helm` `Docker` `GitLab`
+
+`VSCode`
 
 # Employment History
 
-## Tyche Tech Co, Ltd
+## 🇹🇼 Tyche Tech Co, Ltd
 `Senior Server Engineer` Jan. 2021 - Present
 
 ### Developed Gaming Serves ... (Golang)
@@ -22,10 +28,10 @@
   * GitLab Runner
   * Docker Registry
   * Minio
-* Designed deploy scirpt for `Game Servers` on linux server (Bash Script)
+* Designed deploy script for `Game Servers` on linux server (Bash Script)
 
 
-## Terpro Mobile Co, Ltd
+## 🇹🇼 Terpro Mobile Co, Ltd
 `Senior Server Engineer` Jun. 2019 - Dec. 2020
 
 ### Developed Gaming Serves ... (Golang)
@@ -40,7 +46,7 @@ Developed simple website as entries of game server
 
 
 
-## WistronITS Corp. Stationed: Taiwan Mobile 
+## 🇹🇼 WistronITS Corp. Stationed: Taiwan Mobile 
 `Senior Backend Engineer` Sep. 2016 - May 2019
 
 ### Led 2 engineers, Developed Backend server
@@ -66,20 +72,20 @@ Developed Vue.js components for the CMS team, increased development efficiency (
 
 
 
-## Kangda Info Corp.
+## 🇹🇼 Kangda Info Corp.
 `Software Engineer` Jul. 2015 - Aug. 2016
 * Developed project for MOST(Ministry of Science and Technology, R.O.C.) Department
 
 
 
-## BenQ Corp.
+## 🇹🇼 BenQ Corp.
 `Software Engineer` Nov. 2013 - Feb. 2015
 * Developed 『Qmobi』, POC of E-Commerce (PHP, Wordpress, MySQL)
 * Developed 『eBookTaiwan』(now: digiPages) (Javascript, jQuery)
 
 
 
-## Fashion Intelligence Co, Ltd (Open-Life)
+## 🇹🇼 Fashion Intelligence Co, Ltd (Open-Life)
 `Software Engineer` Nov. 2011 - Oct. 2013
 * Developed and maintained CMS (PHP, Yii, Postgres)
 * Developed event site (PHP)
