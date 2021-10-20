@@ -1,4 +1,105 @@
-### Hi there 👋
+# Summary of Qualifications
+
+* 10+ years experience as web developer.
+* Ability to solve problems efficiently.
+* Possessing all-round analysis and programming skills.
+* Methodical yet creative and having a proven ability for effective problem-solving.
+
+
+
+# Employment History
+
+## Tyche Tech Co, Ltd
+`Senior Server Engineer` Jan. 2021 - Present
+
+### Developed Gaming Serves ... (Golang)
+* Poker, Slot, PachiSlot game logic (TCP/Web Socket)
+* CLI tools to access game servers (gRPC)
+
+### Infrastructure
+* Designed & maintained `Game Servers` helm chart scripts (for `DEV`, `QA` env)
+* Setup services for development on kubernetes
+  * GitLab Runner
+  * Docker Registry
+  * Minio
+* Designed deploy scirpt for `Game Servers` on linux server (Bash Script)
+
+
+## Terpro Mobile Co, Ltd
+`Senior Server Engineer` Jun. 2019 - Dec. 2020
+
+### Developed Gaming Serves ... (Golang)
+* Poker, Slot, PachiSlot game logic (TCP/Web Socket)
+* CLI tools to access game servers (gRPC)
+
+### Kubernetes Deployment Helm Chart Design
+Designed & Maintained  Helm Chart scripts
+
+### Demo Website (Golang, Vue.js)
+Developed simple website as entries of game server
+
+
+
+## WistronITS Corp. Stationed: Taiwan Mobile 
+`Senior Backend Engineer` Sep. 2016 - May 2019
+
+### Led 2 engineers, Developed Backend server
+* Developed micro-service, provided RESTful web service
+* OpenId Service (Golang, Google APIs)
+* Product Service (Java, SpringBoot, Golang, MSSQL, Memcached)
+* Payment Service (Golang, MSSQL, Memcached)
+* Stock Service (Golang, MSSQL, Memcached)
+* Kafka Forwarder (Golang, Kafka)
+* Maintained Invoice & Receipt Process System (Java, Spring, JBoss, Oracle)
+
+### Developed Frontend components
+Developed Vue.js components for the CMS team, increased development efficiency (vue.js, Webpack)
+
+### Built-up automated test / static-analysis / deploy mechanism
+
+### Created dev environments and tools with Docker
+* Jenkins Server: Auto build Maven, NPM project and publish to Nexus Server
+* Nexus Server: Managed private Maven repository and NPM registry
+* Gitbook Demo: Write development documents with Gitbook
+* Vue Components Demo
+* Tomcat Server
+
+
+
+## Kangda Info Corp.
+`Software Engineer` Jul. 2015 - Aug. 2016
+* Developed project for MOST(Ministry of Science and Technology, R.O.C.) Department
+
+
+
+## BenQ Corp.
+`Software Engineer` Nov. 2013 - Feb. 2015
+* Developed 『Qmobi』, POC of E-Commerce (PHP, Wordpress, MySQL)
+* Developed 『eBookTaiwan』(now: digiPages) (Javascript, jQuery)
+
+
+
+## Fashion Intelligence Co, Ltd (Open-Life)
+`Software Engineer` Nov. 2011 - Oct. 2013
+* Developed and maintained CMS (PHP, Yii, Postgres)
+* Developed event site (PHP)
+
+
+
+# Piecework Project
+
+### Yapro car tax refund management
+Jan. 2021 - Mar. 2021
+* 2 members team work.
+* Created RestAPI Server, base on Golang.
+* Created AWS Services, use ECS, RDS.
+
+### Muxin CarePro CMS
+Nov. 2013 - Mar. 2015
+* 5 members team work.
+* Created Server, Linode account, base on CentOS, Apache, PHP, Postgres SQL.
+
+
 
 <!--
 **ggwhite/ggwhite** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
