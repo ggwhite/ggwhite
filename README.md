@@ -7,7 +7,7 @@
 
 
 ### Skills & Tools
-`Golang` `gRPC` `Protocol Buffers`
+[`Golang`](skills/Golang.md) `gRPC` `Protocol Buffers`
 
 `Kubernetes` `Helm` `Docker` `GitLab`
 
@@ -97,13 +97,13 @@ Developed Vue.js components for the CMS team, increased development efficiency (
 ### Yapro car tax refund management
 Jan. 2021 - Mar. 2021
 * 2 members team work.
-* Created RestAPI Server, base on Golang.
-* Created AWS Services, use ECS, RDS.
+* Created RestAPI Server, base on Golang
+* Created AWS Services, use ECS, RDS
 
 ### Muxin CarePro CMS
 Nov. 2013 - Mar. 2015
-* 5 members team work.
-* Created Server, Linode account, base on CentOS, Apache, PHP, Postgres SQL.
+* 5 members team work
+* Created Server, Linode account, base on CentOS, Apache, PHP, Postgres SQL
 
 
 
