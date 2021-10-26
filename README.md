@@ -6,7 +6,7 @@
 * Methodical yet creative and having a proven ability for effective problem-solving.
 
 
-### Skills & Tools
+### [Skills & Tools](skills)
 [`Golang`](skills/Golang.md) `gRPC` `Protocol Buffers`
 
 `Kubernetes` `Helm` `Docker` `GitLab`
