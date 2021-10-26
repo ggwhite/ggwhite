@@ -15,7 +15,7 @@
 
 # Employment History
 
-## [🇹🇼 Tyche Tech Co, Ltd](employments/202101-tyche/README.md)
+## [🇹🇼 Tyche Tech Co, Ltd](employments/202101-tyche)
 `Senior Server Engineer` Jan. 2021 - Present
 
 ### Developed Gaming Serves ... (Golang)
