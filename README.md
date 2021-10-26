@@ -15,7 +15,7 @@
 
 # Employment History
 
-## 🇹🇼 Tyche Tech Co, Ltd
+## [🇹🇼 Tyche Tech Co, Ltd](employments/202101-tyche/README.md)
 `Senior Server Engineer` Jan. 2021 - Present
 
 ### Developed Gaming Serves ... (Golang)
@@ -31,7 +31,7 @@
 * Designed deploy script for `Game Servers` on linux server (Bash Script)
 
 
-## 🇹🇼 Terpro Mobile Co, Ltd
+## [🇹🇼 Terpro Mobile Co, Ltd](employments/201906-terpro/README.md)
 `Senior Server Engineer` Jun. 2019 - Dec. 2020
 
 ### Developed Gaming Serves ... (Golang)
@@ -46,7 +46,7 @@ Developed simple website as entries of game server
 
 
 
-## 🇹🇼 WistronITS Corp. Stationed: Taiwan Mobile 
+## [🇹🇼 WistronITS Corp. Stationed: Taiwan Mobile](employments/201609-wits-twm/README.md)
 `Senior Backend Engineer` Sep. 2016 - May 2019
 
 ### Led 2 engineers, Developed Backend server
@@ -72,20 +72,20 @@ Developed Vue.js components for the CMS team, increased development efficiency (
 
 
 
-## 🇹🇼 Kangda Info Corp.
+## [🇹🇼 Kangda Info Corp.](employments/201507-kangda/README.md)
 `Software Engineer` Jul. 2015 - Aug. 2016
 * Developed project for MOST(Ministry of Science and Technology, R.O.C.) Department
 
 
 
-## 🇹🇼 BenQ Corp.
+## [🇹🇼 BenQ Corp.](employments/201311-benq/README.md)
 `Software Engineer` Nov. 2013 - Feb. 2015
 * Developed 『Qmobi』, POC of E-Commerce (PHP, Wordpress, MySQL)
 * Developed 『eBookTaiwan』(now: digiPages) (Javascript, jQuery)
 
 
 
-## 🇹🇼 Fashion Intelligence Co, Ltd (Open-Life)
+## [🇹🇼 Fashion Intelligence Co, Ltd (Open-Life)](employments/201111-openlife/README.md)
 `Software Engineer` Nov. 2011 - Oct. 2013
 * Developed and maintained CMS (PHP, Yii, Postgres)
 * Developed event site (PHP)
