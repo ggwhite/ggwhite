@@ -18,6 +18,12 @@
 ## [🇹🇼 Tyche Tech Co, Ltd](employments/202101-tyche)
 `Senior Server Engineer` Jan. 2021 - Present
 
+### Maintained & Developed Gaming Serves ... (Lua, PHP)
+* Maintained Servers of `Gate`, `Lobby`, `Game` (Lua)
+* Maintained Web / API Servers (PHP, Laravel)
+* Developed Games (Lua)
+* Designed CI/CD pipelines (GitLab CI)
+
 ### Developed Gaming Serves ... (Golang)
 * Poker, Slot, PachiSlot game logic (TCP/Web Socket)
 * CLI tools to access game servers (gRPC)
