@@ -94,6 +94,15 @@ Developed Vue.js components for the CMS team, increased development efficiency (
 
 # Piecework Project
 
+### PGS Game Server
+Dec. 2022 - Apr. 2023
+
+Designed & Developed 3 games and a dashboard web for the game server
+* Worked as a solo developer
+* Game Server (Golang, TCP/Web Socket, gRPC)
+* API Server (Golang, Gin, gRPC)
+* Web Dashboard (Vue.js, Nuxt3, TailwindCSS)
+
 ### Yapro car tax refund management
 Jan. 2021 - Mar. 2021
 * 2 members team work.
@@ -104,7 +113,6 @@ Jan. 2021 - Mar. 2021
 Nov. 2013 - Mar. 2015
 * 5 members team work
 * Created Server, Linode account, base on CentOS, Apache, PHP, Postgres SQL
-
 
 
 <!--
