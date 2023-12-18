@@ -18,6 +18,12 @@
 ## [🇹🇼 Tyche Tech Co, Ltd](employments/202101-tyche)
 `Senior Server Engineer` Jan. 2021 - Present
 
+### Maintained & Developed Gaming Serves & Backend Management System ... (Lua, Java)
+* Maintained Micro-Service Servers with skynet (Lua)
+* Maintained Backend Management System (Java, SpringBoot)
+* Developed Games (Lua)
+* Designed CI/CD pipelines (GitLab CI)
+
 ### Maintained & Developed Gaming Serves ... (Lua, PHP)
 * Maintained Servers of `Gate`, `Lobby`, `Game` (Lua)
 * Maintained Web / API Servers (PHP, Laravel)
