@@ -5,6 +5,7 @@
 * 10 年以上後端工程師經歷，專精遊戲服務器架構（Lua/Skynet/Golang/Java）
 * 具備 MongoDB 效能優化、Redis 架構設計實戰經驗，解決大規模資料查詢效能問題
 * 熟悉 Kubernetes、Docker、GitLab CI/CD 等 DevOps 工具，具雲端與本地混合部署經驗
+* 具備 AI 輔助開發工作流程經驗（Claude Code、GitHub Copilot）
 
 ### [TIL — 今日所學](til/README.md)
 

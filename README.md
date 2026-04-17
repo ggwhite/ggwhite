@@ -5,6 +5,7 @@ English | [繁體中文](README.zh-TW.md)
 * 10+ years experience as backend engineer, specializing in game server architecture (Lua/Skynet/Golang/Java)
 * Hands-on experience in MongoDB performance tuning and Redis architecture optimization for large-scale data
 * Proficient in Kubernetes, Docker, and GitLab CI/CD; experienced in hybrid cloud/on-premise deployments
+* Experienced in AI-assisted development workflows (Claude Code, GitHub Copilot)
 
 ### [TIL — Today I Learned](til/README.md)
 
