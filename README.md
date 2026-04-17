@@ -1,17 +1,17 @@
 # Summary of Qualifications
 
-* 10+ years experience as web developer.
-* Ability to solve problems efficiently.
-* Possessing all-round analysis and programming skills.
-* Methodical yet creative and having a proven ability for effective problem-solving.
-
+* 10+ years experience as backend engineer, specializing in game server architecture (Lua/Skynet/Golang/Java)
+* Hands-on experience in MongoDB performance tuning and Redis architecture optimization for large-scale data
+* Proficient in Kubernetes, Docker, and GitLab CI/CD; experienced in hybrid cloud/on-premise deployments
 
 ### [TIL — Today I Learned](til/README.md)
 
 ### [Skills & Tools](skills)
-[`Golang`](skills/Golang.md) `gRPC` `Protocol Buffers`
+[`Golang`](skills/Golang.md) [`Java`](skills/Java.md) [`Lua`](skills/Lua.md) `JavaScript`
 
-`Kubernetes` `Helm` `Docker` `GitLab`
+`Kubernetes` `Helm` `Docker` `GitLab CI/CD` `Harbor`
+
+`MongoDB` `Redis` `MySQL` `PostgreSQL` `Oracle`
 
 `VSCode`
 

@@ -4,12 +4,13 @@
 
 ## Summary
 
-### Developed Gaming Serves ... (Golang)
-* Poker, Slot, PachiSlot game logic (TCP/Web Socket)
-* CLI tools to access game servers (gRPC)
+### Slot Game Core Framework (Golang)
+* Developed reusable game framework for slot machines
+* Encapsulated shared mechanics: FreeGame, Lightning, PickGame
+* New games can reuse the framework directly, significantly reducing development cycle
 
-### Kubernetes Deployment Helm Chart Design
-Designed & Maintained  Helm Chart scripts
+### Kubernetes Deployment
+* Designed and maintained Helm chart deployment scripts
 
 ### Demo Website (Golang, Vue.js)
-Developed simple website as entries of game server
+* Developed simple website as entry points for game servers
