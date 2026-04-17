@@ -1,3 +1,5 @@
+English | [繁體中文](README.zh-TW.md)
+
 # Summary of Qualifications
 
 * 10+ years experience as backend engineer, specializing in game server architecture (Lua/Skynet/Golang/Java)
