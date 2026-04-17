@@ -13,6 +13,8 @@
 
 `MongoDB` `Redis` `MySQL` `PostgreSQL` `Oracle`
 
+`Claude Code` `GitHub Copilot`
+
 `VSCode`
 
 # Employment History

@@ -29,6 +29,13 @@
 | PostgreSQL | General backend development |
 | Oracle | Legacy system maintenance |
 
+## AI-Assisted Development
+
+| Tool | Usage |
+|------|-------|
+| Claude Code | AI pair programming, code generation, automated workflows (hooks, scripts) |
+| GitHub Copilot | Inline code completion |
+
 ## Other Tools
 
 `RabbitMQ` `Postman` `JMeter`
