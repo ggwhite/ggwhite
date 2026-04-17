@@ -6,6 +6,8 @@
 * Methodical yet creative and having a proven ability for effective problem-solving.
 
 
+### [TIL — Today I Learned](til/README.md)
+
 ### [Skills & Tools](skills)
 [`Golang`](skills/Golang.md) `gRPC` `Protocol Buffers`
 
