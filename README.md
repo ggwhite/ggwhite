@@ -20,89 +20,32 @@
 ## [🇹🇼 Tyche Tech Co, Ltd](employments/202101-tyche)
 `Senior Server Engineer` Jan. 2021 - Present
 
-### Maintained & Developed Gaming Serves & Backend Management System ... (Lua, Java)
-* Maintained Micro-Service Servers with skynet (Lua)
-* Maintained Backend Management System (Java, SpringBoot)
-* Developed Games (Lua)
-* Designed CI/CD pipelines (GitLab CI)
-
-### Maintained & Developed Gaming Serves ... (Lua, PHP)
-* Maintained Servers of `Gate`, `Lobby`, `Game` (Lua)
-* Maintained Web / API Servers (PHP, Laravel)
-* Developed Games (Lua)
-* Designed CI/CD pipelines (GitLab CI)
-
-### Developed Gaming Serves ... (Golang)
-* Poker, Slot, PachiSlot game logic (TCP/Web Socket)
-* CLI tools to access game servers (gRPC)
-
-### Infrastructure
-* Designed & maintained `Game Servers` helm chart scripts (for `DEV`, `QA` env)
-* Setup services for development on kubernetes
-  * GitLab Runner
-  * Docker Registry
-  * Minio
-* Designed deploy script for `Game Servers` on linux server (Bash Script)
-
+Game server & backend management system. Lua/Skynet, Java, Golang. MongoDB/Redis optimization, security hardening, CI/CD, DevOps.
 
 ## [🇹🇼 Terpro Mobile Co, Ltd](employments/201906-terpro)
 `Senior Server Engineer` Jun. 2019 - Dec. 2020
 
-### Developed Gaming Serves ... (Golang)
-* Poker, Slot, PachiSlot game logic (TCP/Web Socket)
-* CLI tools to access game servers (gRPC)
-
-### Kubernetes Deployment Helm Chart Design
-Designed & Maintained  Helm Chart scripts
-
-### Demo Website (Golang, Vue.js)
-Developed simple website as entries of game server
-
-
+Slot game core framework (FreeGame, Lightning, PickGame). Golang, Kubernetes/Helm.
 
 ## [🇹🇼 WistronITS Corp. Stationed: Taiwan Mobile](employments/201609-wits-twm)
 `Senior Backend Engineer` Sep. 2016 - May 2019
 
-### Led 2 engineers, Developed Backend server
-* Developed micro-service, provided RESTful web service
-* OpenId Service (Golang, Google APIs)
-* Product Service (Java, SpringBoot, Golang, MSSQL, Memcached)
-* Payment Service (Golang, MSSQL, Memcached)
-* Stock Service (Golang, MSSQL, Memcached)
-* Kafka Forwarder (Golang, Kafka)
-* Maintained Invoice & Receipt Process System (Java, Spring, JBoss, Oracle)
-
-### Developed Frontend components
-Developed Vue.js components for the CMS team, increased development efficiency (vue.js, Webpack)
-
-### Built-up automated test / static-analysis / deploy mechanism
-
-### Created dev environments and tools with Docker
-* Jenkins Server: Auto build Maven, NPM project and publish to Nexus Server
-* Nexus Server: Managed private Maven repository and NPM registry
-* Gitbook Demo: Write development documents with Gitbook
-* Vue Components Demo
-* Tomcat Server
-
-
+Led 2 engineers. Micro-service RESTful API, Golang/Java. CI/CD pipeline, Docker dev environment.
 
 ## [🇹🇼 Kangda Info Corp.](employments/201507-kangda)
 `Software Engineer` Jul. 2015 - Aug. 2016
-* Developed project for MOST(Ministry of Science and Technology, R.O.C.) Department
 
-
+Government project (MOST). Java, PostgreSQL.
 
 ## [🇹🇼 BenQ Corp.](employments/201311-benq)
 `Software Engineer` Nov. 2013 - Feb. 2015
-* Developed 『Qmobi』, POC of E-Commerce (PHP, Wordpress, MySQL)
-* Developed 『eBookTaiwan』(now: digiPages) (Javascript, jQuery)
 
-
+E-Commerce POC, eBookTaiwan platform. PHP, JavaScript, jQuery.
 
 ## [🇹🇼 Fashion Intelligence Co, Ltd (Open-Life)](employments/201111-openlife)
 `Software Engineer` Nov. 2011 - Oct. 2013
-* Developed and maintained CMS (PHP, Yii, Postgres)
-* Developed event site (PHP)
+
+CMS development and maintenance. PHP, Yii, PostgreSQL.
 
 
 
