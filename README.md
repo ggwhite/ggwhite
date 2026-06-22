@@ -1,24 +1,49 @@
-Senior Backend Engineer with 10+ years in game server architecture.
+<h1 align="center">Hi, I'm White 👋</h1>
 
-I design the system, AI implements it, I catch what AI misses.
+<p align="center">
+  <strong>Senior Backend Engineer</strong> · 10+ years in game server architecture
+</p>
 
-### Featured Project
+<p align="center">
+  I design the system, AI implements it, I catch what AI misses.
+</p>
 
-**[4x](https://github.com/ggwhite/4x)** — Multi-role AI development framework that splits the engineering loop into Design / Code / Review / Test, each driven by a dedicated AI agent with deterministic guardrails in Go.
+<p align="center">
+  <a href="https://ggwhite.github.io/resume/">📄 Resume</a> ·
+  <a href="https://github.com/ggwhite/ggwhite/tree/main/til">📝 TIL</a> ·
+  <a href="https://www.linkedin.com/in/white-chang/">💼 LinkedIn</a>
+</p>
 
-**[go-masker](https://github.com/ggwhite/go-masker)** — Utility for masking sensitive data in Go structs and strings.
+---
 
-### Skills & Tools
+### 🔧 Tech Stack
 
-`Golang` `Java` `Lua` `JavaScript`
+<p>
+  <a href="https://skillicons.dev">
+    <img src="https://skillicons.dev/icons?i=go,java,lua,js,vue,docker,kubernetes,mongodb,redis,mysql,postgres,git,gitlab,vscode&perline=7" />
+  </a>
+</p>
 
-`Kubernetes` `Helm` `Docker` `GitLab CI/CD` `Harbor`
+### 🚀 Featured Projects
 
-`MongoDB` `Redis` `MySQL` `PostgreSQL` `Oracle`
+| Project | Description |
+|---------|-------------|
+| **[4x](https://github.com/ggwhite/4x)** | Multi-role AI dev framework — Design / Code / Review / Test, deterministic guardrails in Go |
+| **[go-masker](https://github.com/ggwhite/go-masker)** | Mask sensitive data in Go structs and strings · ⭐ 126 |
 
-`Claude Code` `Codex`
+### 💡 What I Do
 
-### Links
+```text
+🏗️  Architecture     ████████████████████░░   10+ yrs
+🤖  AI Orchestration  ██████████████░░░░░░░   Building 4x
+🔒  Security          ████████████░░░░░░░░░   Redis incident response, AES/checksum
+⚙️  DevOps            ████████████████░░░░░   K8s, Docker, GitLab CI/CD
+🗄️  Database          ████████████████░░░░░   MongoDB tuning, Redis optimization
+```
 
-- [Resume](https://ggwhite.github.io/resume/)
-- [TIL — Today I Learned](https://github.com/ggwhite/ggwhite/tree/main/til)
+---
+
+<p align="center">
+  <img src="https://github-readme-stats.vercel.app/api?username=ggwhite&show_icons=true&theme=tokyonight&hide_border=true&hide=issues&count_private=true" height="165" />
+  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=ggwhite&layout=compact&theme=tokyonight&hide_border=true" height="165" />
+</p>
