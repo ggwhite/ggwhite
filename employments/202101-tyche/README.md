@@ -1,6 +1,6 @@
 # 🇹🇼 Tyche Tech Co, Ltd
 
-`Senior Server Engineer` Jan. 2021 - Present
+`Senior Backend Engineer` Jan. 2021 - Present
 
 ## Projects
 

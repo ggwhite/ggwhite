@@ -2,10 +2,10 @@
 
 # 個人簡介
 
-* 10 年以上後端工程師經歷，專精遊戲服務器架構（Lua/Skynet/Golang/Java）
-* 具備 MongoDB 效能優化、Redis 架構設計實戰經驗，解決大規模資料查詢效能問題
+* 10 年以上後端工程師經歷，專精高併發分散式系統，橫跨遊戲、支付與企業 API 領域
+* 具備 MongoDB 效能優化、Redis 架構設計實戰經驗，處理日均 ~270 萬筆資料規模
 * 熟悉 Kubernetes、Docker、GitLab CI/CD 等 DevOps 工具，具雲端與本地混合部署經驗
-* 具備 AI 輔助開發工作流程經驗（Claude Code、GitHub Copilot）
+* AI 增強開發實踐者——開發了 4x 開源多角色 AI 開發框架
 
 ### [TIL — 今日所學](til/README.md)
 
@@ -25,7 +25,7 @@
 ## [🇹🇼 大極科技 Tyche Tech Co, Ltd](employments/202101-tyche/README.zh-TW.md)
 `資深後端服務工程師` 2021/01 - 現在
 
-遊戲服務器與後台管理系統開發維護。Lua/Skynet、Java、Golang。MongoDB/Redis 效能優化、資安強化、CI/CD、DevOps。
+主導多平台遊戲系統架構與交付（5-10 人團隊）。Lua/Skynet、Java、Golang。MongoDB/Redis 效能優化、資安強化、CI/CD、DevOps。
 
 ## [🇹🇼 專羿行動 Terpro Mobile Co, Ltd](employments/201906-terpro/README.zh-TW.md)
 `資深後端服務工程師` 2019/06 - 2020/12

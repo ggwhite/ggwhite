@@ -1,7 +1,7 @@
 <h1 align="center">Hi, I'm White 👋</h1>
 
 <p align="center">
-  <strong>Senior Backend Engineer</strong> · 10+ years in game server architecture
+  <strong>Senior Backend Engineer</strong> · 10+ years in high-concurrency distributed systems
 </p>
 
 <p align="center">

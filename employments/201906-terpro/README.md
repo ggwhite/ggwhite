@@ -1,6 +1,6 @@
 # 🇹🇼 Terpro Mobile Co, Ltd
 
-`Senior Server Engineer` Jun. 2019 - Dec. 2020
+`Senior Backend Engineer` Jun. 2019 - Dec. 2020
 
 ## Summary
 
