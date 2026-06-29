@@ -22,6 +22,12 @@
 
 ## 主要成就
 
+### 平台現代化（獨立主導）
+* 以 Go 重寫 Lua/PHP/Java 混合遊戲平台，涵蓋 TCP gateway、遊戲引擎、BI 後台、支付服務
+* 設計多租戶 config-driven 架構，單一 codebase 支援 13 個平台，取代各自 fork 的 release branch
+* 設計 Proto2/Proto3 雙相容序列化層，舊 Lua client 無縫接入 Go 新系統
+* 實作 Redis 資料 HMAC-SHA256 簽章機制，從架構層防禦資料竄改攻擊
+
 ### MongoDB 效能優化
 * 診斷全集合掃描問題（每日約 270 萬筆資料）
 * 設計複合索引，實作 Lua Server 排程自動預建每日索引
@@ -31,8 +37,8 @@
 * 避免大量 SCAN 操作，提升查詢效率
 
 ### 資安強化
-* 調查 Redis 資料遭竄改事件，發現攻擊者透過 PHP vendor 目錄漏洞入侵
-* 實作 AES 加密與 Checksum 驗證機制，確保異常竄改可被即時偵測與阻擋
+* 調查 Redis 資料竄改事件，追蹤完整攻擊鏈（遊戲狀態偽造 + 出款紀錄竄改）
+* 設計 HMAC 簽章 + 狀態機 + audit trail 三層防護架構
 
 ### CI/CD Pipeline
 * 設計並維護 GitLab CI/CD Pipeline

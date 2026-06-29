@@ -20,6 +20,12 @@
 
 ## Key Achievements
 
+### Platform Modernization (Solo Lead)
+* Rewrote Lua/PHP/Java gaming platform in Go — TCP gateway, game engine, BI backend, payment services
+* Designed multi-tenant config-driven architecture: single codebase serving 13 platforms, replacing per-platform release branch forks
+* Designed Proto2/Proto3 dual-compatible serialization layer for seamless legacy Lua client migration to Go
+* Implemented Redis data HMAC-SHA256 signing to architecturally prevent data tampering attacks
+
 ### MongoDB Performance Optimization
 * Diagnosed full-collection scan on ~2.7M records/day
 * Designed compound indexes and implemented Lua scheduler to pre-build daily indexes automatically
@@ -29,8 +35,8 @@
 * Eliminated excessive `SCAN` operations, improved query efficiency
 
 ### Security Hardening
-* Investigated Redis data tampering incident; traced attack vector to PHP vendor directory vulnerability
-* Implemented AES encryption and checksum verification to detect and block unauthorized data modification
+* Investigated Redis data tampering, traced full attack chain (game state forgery + withdrawal record manipulation)
+* Designed three-layer defense: HMAC signing + state machine + audit trail
 
 ### CI/CD Pipeline
 * Designed and maintained GitLab CI/CD pipelines
