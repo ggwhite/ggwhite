@@ -7,6 +7,8 @@ import Footer from "@/components/Footer.astro";
 import ProjectCard from "@/components/ProjectCard.astro";
 import { getProjects } from "@/utils/getProjects";
 import { useTranslations } from "@/i18n";
+import { breadcrumbSchema, projectsItemListSchema } from "@/utils/seo";
+import { seoSite, pageTitle } from "@/utils/seoSite";
 import config from "@/config";
 
 const locale = Astro.currentLocale ?? config.site.lang;
@@ -16,11 +18,20 @@ const projects = await getProjects();
 const featured = projects.filter(p => p.tier === "featured");
 const more = projects.filter(p => p.tier === "more");
 const earlier = projects.filter(p => p.tier === "earlier");
+const jsonLd = [
+  projectsItemListSchema(seoSite, projects),
+  breadcrumbSchema(seoSite, [
+    { name: "Home", path: "" },
+    { name: t.pages.projectsTitle, path: "projects/" },
+  ]),
+];
 ---
 
 <Layout
-  title={`${t.pages.projectsTitle} | ${config.site.title}`}
+  title={pageTitle(t.pages.projectsTitle)}
   description={t.pages.projectsDesc}
+  lang="en"
+  {jsonLd}
 >
   <Header />
 

@@ -5,13 +5,19 @@ import Footer from "@/components/Footer.astro";
 import LinkButton from "@/components/LinkButton.astro";
 import { getRelativeLocaleUrl } from "astro:i18n";
 import { useTranslations } from "@/i18n";
+import { pageTitle } from "@/utils/seoSite";
 import config from "@/config";
 
 const locale = Astro.currentLocale ?? config.site.lang;
 const t = useTranslations(locale);
 ---
 
-<Layout title={`${t.notFound.title} | ${config.site.title}`}>
+<Layout
+  title={pageTitle(t.notFound.title)}
+  description="Page not found on White's Tech Notes. Head back to the home page to browse backend TIL posts on Go, Java, Lua, DevOps and AI tooling."
+  canonicalURL={null}
+  noindex
+>
   <Header />
 
   <main

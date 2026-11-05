@@ -1,3 +1,4 @@
+import { fileURLToPath } from "node:url";
 import {
   defineConfig,
   envField,
@@ -20,7 +21,14 @@ import {
   inlineTocDeprecation,
   rehypeInlineToc,
 } from "./src/utils/rehypeInlineToc";
+import { rehypeExternalLinks } from "./src/utils/rehypeExternalLinks";
+import { tilLastModMap } from "./src/loaders/tilGit";
 import config from "./astro-paper.config";
+
+// Post slug → last git commit of its note, for sitemap <lastmod>.
+const postLastMod = tilLastModMap(
+  fileURLToPath(new URL("../til", import.meta.url))
+);
 
 export default defineConfig({
   site: config.site.url,
@@ -30,7 +38,14 @@ export default defineConfig({
     mdx(),
     sitemap({
       filter: page =>
-        config.features?.showArchives !== false || !/\/archives\/?$/.test(page),
+        !/\/search\/?$/.test(page) &&
+        (config.features?.showArchives !== false ||
+          !/\/archives\/?$/.test(page)),
+      serialize: item => {
+        const slug = item.url.match(/\/posts\/([^/]+)\/?$/)?.[1];
+        const lastmod = slug && postLastMod.get(decodeURIComponent(slug));
+        return lastmod ? { ...item, lastmod } : item;
+      },
     }),
     inlineTocDeprecation(),
   ],
@@ -51,6 +66,7 @@ export default defineConfig({
         rehypeInlineToc,
         rehypeCallouts,
         rehypeTableWrapper,
+        [rehypeExternalLinks, { siteHost: new URL(config.site.url).host }],
       ],
     }),
     shikiConfig: {

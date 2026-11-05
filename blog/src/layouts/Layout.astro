@@ -3,6 +3,7 @@ import { Font } from "astro:assets";
 import { ClientRouter } from "astro:transitions";
 import { resolveDefaultOgImagePath } from "@/utils/resolveDefaultOgImagePath";
 import { getAssetPath } from "@/utils/withBase";
+import { ogLocale, toJsonLd } from "@/utils/seo";
 import config from "@/config";
 import "@/styles/global.css";
 
@@ -10,33 +11,54 @@ type Props = {
   title?: string;
   description?: string;
   ogImage?: string;
-  canonicalURL?: string;
+  /** Alt text for og:image / twitter:image. Defaults to the page title. */
+  ogImageAlt?: string;
+  /** `null` omits canonical and og:url (404: its URL is not a real page). */
+  canonicalURL?: string | null;
+  /** Document language (BCP 47). Defaults to `site.htmlLang`. */
+  lang?: string;
+  /** Emit `noindex, follow` (search results, 404). */
+  noindex?: boolean;
+  ogType?: "website" | "article";
+  /** schema.org nodes, emitted as one JSON-LD `@graph`. */
+  jsonLd?: Record<string, unknown>[];
 };
 
-const { site } = config;
+const { site, socials } = config;
 
 const {
   title = site.title,
   description = site.description,
   ogImage = resolveDefaultOgImagePath(config),
+  ogImageAlt = title,
   canonicalURL = new URL(Astro.url.pathname, Astro.site).href,
+  lang = site.htmlLang,
+  noindex = false,
+  ogType = "website",
+  jsonLd = [],
 } = Astro.props;
 
 const socialImageURL = new URL(ogImage, Astro.site ?? Astro.url);
 const rssHref = getAssetPath("rss.xml");
+// Generated and bundled OG images are all 1200x630 PNG.
+const OG_IMAGE_WIDTH = 1200;
+const OG_IMAGE_HEIGHT = 630;
+const meLinks = socials.filter(s => ["github", "linkedin"].includes(s.name));
+const notoSansTcHref =
+  "https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap";
 ---
 
 <!doctype html>
 <html
   dir={site.dir ?? "ltr"}
-  lang={Astro.currentLocale ?? site.lang}
+  lang={lang}
   class="overflow-y-scroll scroll-smooth"
 >
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/svg+xml" href={getAssetPath("favicon.svg")} />
-    <link rel="canonical" href={canonicalURL} />
+    {canonicalURL && <link rel="canonical" href={canonicalURL} />}
     <meta name="generator" content={Astro.generator} />
 
     <!-- Font -->
@@ -45,35 +67,48 @@ const rssHref = getAssetPath("rss.xml");
       preload={[{ subset: "latin", weight: 400, style: "normal" }]}
     />
 
-    <!-- Noto Sans TC for non-Apple devices (PingFang TC is used on Apple) -->
+    <!--
+      Noto Sans TC for non-Apple devices (PingFang TC is used on Apple).
+      Loaded without blocking render: the system CJK fonts in --font-reading
+      paint first, and display=swap swaps Noto in when it arrives.
+    -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap"
+      href={notoSansTcHref}
+      media="print"
+      {...{ onload: "this.media='all'" }}
     />
+    <noscript><link rel="stylesheet" href={notoSansTcHref} /></noscript>
 
     <!-- Primary meta -->
     <title>{title}</title>
-    <meta name="title" content={title} />
     <meta name="description" content={description} />
     <meta name="author" content={site.author} />
+    {noindex && <meta name="robots" content="noindex, follow" />}
     <link rel="sitemap" href={getAssetPath("sitemap-index.xml")} />
+    {meLinks.map(s => <link rel="me" href={s.url} />)}
 
     <!-- Open Graph -->
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={ogType} />
     <meta property="og:site_name" content={site.title} />
+    <meta property="og:locale" content={ogLocale(lang)} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:url" content={canonicalURL} />
+    {canonicalURL && <meta property="og:url" content={canonicalURL} />}
     <meta property="og:image" content={socialImageURL} />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content={String(OG_IMAGE_WIDTH)} />
+    <meta property="og:image:height" content={String(OG_IMAGE_HEIGHT)} />
+    <meta property="og:image:alt" content={ogImageAlt} />
 
     <!-- Twitter / X -->
-    <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:url" content={canonicalURL} />
-    <meta property="twitter:title" content={title} />
-    <meta property="twitter:description" content={description} />
-    <meta property="twitter:image" content={socialImageURL} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={socialImageURL} />
+    <meta name="twitter:image:alt" content={ogImageAlt} />
 
     <!-- RSS autodiscovery -->
     <link
@@ -83,11 +118,21 @@ const rssHref = getAssetPath("rss.xml");
       href={new URL(rssHref, Astro.site)}
     />
 
-    <!-- Filled at runtime by theme.ts to match the current background colour -->
-    <meta name="theme-color" content="" />
+    <!-- theme.ts updates this to the current background colour at runtime -->
+    <meta name="theme-color" content="#fcfbf8" />
 
-    <!-- Extra head content injected by child layouts (e.g. JSON-LD, article meta) -->
+    <!-- Extra head content injected by child layouts (e.g. article meta) -->
     <slot name="head" />
+
+    {
+      jsonLd.length > 0 && (
+        <script
+          type="application/ld+json"
+          is:inline
+          set:html={toJsonLd(jsonLd)}
+        />
+      )
+    }
 
     {
       site.googleVerification && (
@@ -95,6 +140,11 @@ const rssHref = getAssetPath("rss.xml");
           name="google-site-verification"
           content={site.googleVerification}
         />
+      )
+    }
+    {
+      site.bingVerification && (
+        <meta name="msvalidate.01" content={site.bingVerification} />
       )
     }
 

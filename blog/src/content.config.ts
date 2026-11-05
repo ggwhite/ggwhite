@@ -14,6 +14,8 @@ const posts = defineCollection({
       author: z.string().default(config.site.author),
       pubDatetime: z.date(),
       modDatetime: z.date().optional().nullable(),
+      // Last git commit of the source note; SEO metadata only (see tilLoader).
+      lastModified: z.date().optional(),
       title: z.string(),
       featured: z.boolean().optional(),
       draft: z.boolean().optional(),

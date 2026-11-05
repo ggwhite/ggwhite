@@ -32,11 +32,13 @@ export async function fetchRepoStats({
       signal: AbortSignal.timeout(TIMEOUT_MS),
     });
     if (!res.ok) {
+      // eslint-disable-next-line no-console
       console.warn(`[projects] GitHub API ${res.status}; using fallback stars`);
       return null;
     }
     const repos = await res.json();
     if (!Array.isArray(repos)) {
+      // eslint-disable-next-line no-console
       console.warn("[projects] unexpected GitHub API payload; using fallback");
       return null;
     }
@@ -47,6 +49,7 @@ export async function fetchRepoStats({
       ])
     );
   } catch (err) {
+    // eslint-disable-next-line no-console
     console.warn(`[projects] GitHub API unreachable (${err}); using fallback`);
     return null;
   }

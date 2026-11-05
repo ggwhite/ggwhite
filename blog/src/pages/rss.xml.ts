@@ -11,7 +11,10 @@ export async function GET() {
   return rss({
     title: config.site.title,
     description: config.site.description,
-    site: config.site.url,
+    // Channel <link> is the blog home (project site under the base path);
+    // item links are already base-prefixed absolute paths.
+    site: new URL(import.meta.env.BASE_URL, config.site.url).href,
+    customData: `<language>zh-TW</language>`,
     items: sortedPosts.map(({ data, id, filePath }) => ({
       link: getPostUrl(id, filePath, config.site.lang),
       title: data.title,

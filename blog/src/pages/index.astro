@@ -13,6 +13,8 @@ import ProjectCard from "@/components/ProjectCard.astro";
 import { getProjects } from "@/utils/getProjects";
 import { getSortedPosts } from "@/utils/getSortedPosts";
 import { useTranslations } from "@/i18n";
+import { personSchema, websiteSchema } from "@/utils/seo";
+import { seoSite, sameAs } from "@/utils/seoSite";
 import config from "@/config";
 
 const { socials, posts: postsConfig } = config;
@@ -25,12 +27,22 @@ const sortedPosts = getSortedPosts(posts);
 const featuredPosts = sortedPosts.filter(({ data }) => data.featured);
 const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
 const homePath = getRelativeLocaleUrl(locale, "");
+const jsonLd = [
+  websiteSchema(seoSite, {
+    search: config.features.search === "pagefind",
+    lang: config.site.htmlLang,
+  }),
+  personSchema(seoSite, { sameAs }),
+];
 const featuredProjects = (await getProjects())
   .filter(p => p.tier === "featured")
   .slice(0, 4);
 ---
 
-<Layout>
+<Layout
+  title={`${config.site.title} — Backend TIL on Go, Java & Lua`}
+  {jsonLd}
+>
   <Header />
   <main
     id="main-content"

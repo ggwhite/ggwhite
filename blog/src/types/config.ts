@@ -11,14 +11,21 @@ interface SiteConfig {
   profile?: string;
   /** Fallback OG image filename in /public, e.g. "og.jpg" */
   ogImage?: string;
-  /** HTML lang attribute, defaults to "en" */
+  /** UI/i18n locale (Astro i18n routing), defaults to "en" */
   lang?: string;
+  /**
+   * Default `<html lang>` for pages (BCP 47), e.g. "zh-Hant". Pages may
+   * override it. Defaults to `lang`.
+   */
+  htmlLang?: string;
   /** IANA timezone for post dates, e.g. "Asia/Bangkok" */
   timezone?: string;
   /** Text direction */
   dir?: "ltr" | "rtl" | "auto";
-  /** Google Search Console verification meta tag value */
+  /** Google Search Console verification meta tag value ("" = not rendered) */
   googleVerification?: string;
+  /** Bing Webmaster Tools `msvalidate.01` meta tag value ("" = not rendered) */
+  bingVerification?: string;
 }
 
 interface PostsConfig {
@@ -120,9 +127,10 @@ type ResolvedSiteConfig = Required<
     | "timezone"
     | "dir"
     | "ogImage"
+    | "htmlLang"
   >
 > &
-  Pick<SiteConfig, "profile" | "googleVerification">;
+  Pick<SiteConfig, "profile" | "googleVerification" | "bingVerification">;
 
 export interface ResolvedAstroPaperConfig {
   site: ResolvedSiteConfig;

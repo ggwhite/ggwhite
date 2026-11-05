@@ -1,9 +1,9 @@
-import { execFileSync } from "node:child_process";
-import { readdirSync, readFileSync, statSync } from "node:fs";
+import { readFileSync, statSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import type { Loader } from "astro/loaders";
 import { parseTil, tilSlug } from "./parseTil.js";
+import { gitFirstCommitDate, gitLastCommitDate, walkTil } from "./tilGit.js";
 
 interface TilLoaderOptions {
   /** Directory holding the TIL markdown, relative to the Astro project root. */
@@ -12,36 +12,13 @@ interface TilLoaderOptions {
   defaultCategory?: string;
 }
 
-function walk(dir: string): string[] {
-  return readdirSync(dir, { withFileTypes: true }).flatMap(d => {
-    if (d.name.startsWith(".") || d.name.startsWith("_")) return [];
-    const full = path.join(dir, d.name);
-    if (d.isDirectory()) return walk(full);
-    return /\.md$/i.test(d.name) && d.name.toLowerCase() !== "readme.md"
-      ? [full]
-      : [];
-  });
-}
-
-/** Date the file was first committed (YYYY-MM-DD), or null if untracked. */
-function gitFirstCommitDate(file: string): string | null {
-  try {
-    const out = execFileSync(
-      "git",
-      ["log", "--follow", "--diff-filter=A", "--format=%as", "--", file],
-      { cwd: path.dirname(file), encoding: "utf8" }
-    ).trim();
-    const lines = out.split("\n").filter(Boolean);
-    return lines.at(-1) ?? null;
-  } catch {
-    return null;
-  }
-}
-
 /**
  * Content-layer loader for the repo's `til/` notes. The notes carry no
  * frontmatter: title comes from the H1, date from the `**日期：**` line
  * (fallback: first git commit, then file mtime), category from the folder.
+ * `lastModified` is the file's last git commit, used only for SEO metadata
+ * (article:modified_time, JSON-LD, sitemap lastmod) so list order and the
+ * visible byline stay on the publish date.
  */
 export function tilLoader({
   base,
@@ -64,7 +41,7 @@ export function tilLoader({
       const loadAll = async () => {
         store.clear();
         const seen = new Map<string, string>();
-        for (const file of walk(baseDir)) {
+        for (const file of walkTil(baseDir)) {
           const rel = path.relative(baseDir, file);
           const fileName = path.basename(file);
           const segments = rel.split(path.sep);
@@ -91,13 +68,21 @@ export function tilLoader({
             logger.warn(`${rel}: no date line, using git date ${date}`);
           }
 
+          const pubDatetime = new Date(`${date}T00:00:00+08:00`);
+          const lastCommit = gitLastCommitDate(file);
+          const lastModified =
+            lastCommit && new Date(lastCommit) > pubDatetime
+              ? new Date(lastCommit)
+              : pubDatetime;
+
           const filePath = path.relative(root, file).split(path.sep).join("/");
           const data = await parseData({
             id,
             filePath,
             data: {
               title: parsed.title,
-              pubDatetime: new Date(`${date}T00:00:00+08:00`),
+              pubDatetime,
+              lastModified,
               description: parsed.description,
               tags: [category],
             },

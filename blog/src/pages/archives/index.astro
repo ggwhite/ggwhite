@@ -14,6 +14,7 @@ import { postFilter } from "@/utils/postFilter";
 import { resolveTimezone } from "@/utils/resolveTimezone";
 import { getPostsByGroupCondition } from "./_utils/getPostsByGroupCondition";
 import { useTranslations } from "@/i18n";
+import { pageTitle } from "@/utils/seoSite";
 import config from "@/config";
 
 dayjs.extend(utc);
@@ -31,6 +32,7 @@ const t = useTranslations(locale);
 
 const posts = await getCollection("posts");
 const filteredPosts = posts.filter(postFilter);
+const description = `Every TIL post on White's Tech Notes by year and month: ${filteredPosts.length} notes on Go, Java, Lua, DevOps, databases and AI-assisted development.`;
 const monthFormatter = new Intl.DateTimeFormat(locale, { month: "long" });
 
 // Group by the calendar day the post's byline shows (see Datetime.astro),
@@ -41,7 +43,7 @@ const publishDate = (post: CollectionEntry<"posts">) =>
   );
 ---
 
-<Layout title={`${t.pages.archivesTitle} | ${config.site.title}`}>
+<Layout title={pageTitle(t.pages.archivesTitle)} {description}>
   <Header />
 
   <Breadcrumb />

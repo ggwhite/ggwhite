@@ -1,0 +1,37 @@
+---
+import { getPostUrl } from "@/utils/getPostPaths";
+import config from "@/config";
+
+type Props = {
+  posts: { id: string; title: string; filePath: string | undefined }[];
+};
+
+const { posts } = Astro.props;
+const locale = Astro.currentLocale ?? config.site.lang;
+---
+
+{
+  posts.length > 0 && (
+    <section
+      data-pagefind-ignore
+      aria-labelledby="related-posts"
+      class="my-8"
+    >
+      <h2 id="related-posts" class="text-xl font-semibold tracking-wide">
+        Related posts
+      </h2>
+      <ul class="mt-4 list-disc space-y-2 ps-5">
+        {posts.map(p => (
+          <li>
+            <a
+              href={getPostUrl(p.id, p.filePath, locale)}
+              class="text-accent decoration-dashed underline-offset-4 hover:underline"
+            >
+              {p.title}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </section>
+  )
+}

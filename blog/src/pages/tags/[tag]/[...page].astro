@@ -12,6 +12,8 @@ import { getUniqueTags } from "@/utils/getUniqueTags";
 import { getSortedPosts } from "@/utils/getSortedPosts";
 import { slugifyAll } from "@/utils/slugify";
 import { useTranslations } from "@/i18n";
+import { breadcrumbSchema } from "@/utils/seo";
+import { seoSite, pageTitle, pageSuffix } from "@/utils/seoSite";
 import config from "@/config";
 
 export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
@@ -35,9 +37,26 @@ const { page, tagName } = Astro.props;
 
 const locale = Astro.currentLocale ?? config.site.lang;
 const t = useTranslations(locale);
+
+const description =
+  `${page.total} TIL ${page.total === 1 ? "post" : "posts"} tagged "${tagName}" on White's Tech Notes: real problems a backend engineer hit, with the root cause and the fix.` +
+  (page.currentPage > 1 ? ` Page ${page.currentPage} of ${page.lastPage}.` : "");
+const jsonLd = [
+  breadcrumbSchema(seoSite, [
+    { name: "Home", path: "" },
+    { name: t.pages.tagsTitle, path: "tags/" },
+    { name: tagName, path: `tags/${Astro.params.tag}/` },
+  ]),
+];
 ---
 
-<Layout title={`${t.pages.tagTitle}: ${tagName} | ${config.site.title}`}>
+<Layout
+  title={pageTitle(
+    `${t.pages.tagTitle}: ${tagName}${pageSuffix(page.currentPage)}`
+  )}
+  {description}
+  {jsonLd}
+>
   <Header />
 
   <Breadcrumb />

@@ -15,6 +15,9 @@ import BackButton from "./_components/BackButton.astro";
 import BackToTopButton from "./_components/BackToTopButton.astro";
 import AdjacentPostNav from "./_components/AdjacentPostNav.astro";
 import PostToc from "./_components/PostToc.astro";
+import RelatedPosts from "./_components/RelatedPosts.astro";
+import { getRelatedPosts } from "@/utils/relatedPosts";
+import { detectLang } from "@/utils/seo";
 import config from "@/config";
 
 export async function getStaticPaths() {
@@ -25,6 +28,11 @@ export async function getStaticPaths() {
     params: { slug: getPostSlug(post.id, post.filePath) },
     props: {
       post,
+      relatedPosts: getRelatedPosts(post, sortedPosts).map(p => ({
+        id: p.id,
+        title: p.data.title,
+        filePath: p.filePath,
+      })),
       // sortedPosts is newest-first, so "older" (prev) is a higher index
       // and "newer" (next) is a lower index.
       prevPost:
@@ -55,11 +63,12 @@ type AdjacentPost = {
 
 type Props = {
   post: CollectionEntry<"posts">;
+  relatedPosts: NonNullable<AdjacentPost>[];
   prevPost: AdjacentPost;
   nextPost: AdjacentPost;
 };
 
-const { post, prevPost, nextPost } = Astro.props;
+const { post, relatedPosts, prevPost, nextPost } = Astro.props;
 const locale = Astro.currentLocale ?? config.site.lang;
 
 const {
@@ -69,6 +78,7 @@ const {
   canonicalURL,
   pubDatetime,
   modDatetime,
+  lastModified,
   timezone,
   tags,
   hideEditPost,
@@ -97,15 +107,20 @@ if (!ogImageUrl && config.features.dynamicOgImage) {
 const ogImage = ogImageUrl
   ? new URL(ogImageUrl, Astro.url.origin).href
   : undefined;
+
+// Posts are Traditional Chinese unless the title and summary have no Han text.
+const lang = detectLang(title, description);
 ---
 
 <PostLayout
-  title={`${title} | ${config.site.title}`}
-  description={description}
-  ogImage={ogImage}
-  canonicalURL={canonicalURL}
-  pubDatetime={pubDatetime}
-  modDatetime={modDatetime}
+  {title}
+  {description}
+  {ogImage}
+  canonicalURL={canonicalURL ?? new URL(Astro.url.pathname, Astro.site).href}
+  {pubDatetime}
+  {lastModified}
+  {tags}
+  {lang}
 >
   <Header />
 
@@ -117,7 +132,6 @@ const ogImage = ogImageUrl
     data-pagefind-body
   >
     <h1
-      lang="zh-Hant"
       style={{ viewTransitionName: toTransitionName(post.id) }}
       class="text-accent inline-block text-2xl font-bold sm:text-3xl"
     >
@@ -142,7 +156,6 @@ const ogImage = ogImageUrl
       <PostToc headings={tocHeadings} />
       <article
         id="article"
-        lang="zh-Hant"
         class:list={[
           "w-full",
           "app-prose max-w-app",
@@ -173,6 +186,8 @@ const ogImage = ogImageUrl
     </div>
 
     <hr class="my-8 border-dashed" />
+
+    <RelatedPosts posts={relatedPosts} />
 
     <AdjacentPostNav {prevPost} {nextPost} />
   </main>
@@ -222,6 +237,10 @@ const ogImage = ogImageUrl
       link.className =
         "heading-link ms-2 no-underline opacity-75 md:opacity-0 md:group-hover:opacity-100 md:focus:opacity-100";
       link.href = "#" + heading.id;
+      link.setAttribute(
+        "aria-label",
+        `Link to section: ${heading.textContent?.trim() ?? ""}`
+      );
 
       const span = document.createElement("span");
       span.ariaHidden = "true";

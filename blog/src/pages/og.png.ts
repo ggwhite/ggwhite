@@ -3,6 +3,7 @@ import satori from "satori";
 import sharp from "sharp";
 import { fontData, experimental_getFontFileURL } from "astro:assets";
 import { getFontPathByWeight } from "@/utils/getFontPathByWeight";
+import { getOgFonts } from "@/utils/ogFonts";
 import config from "@/config";
 
 export const GET: APIRoute = async context => {
@@ -165,6 +166,8 @@ export const GET: APIRoute = async context => {
           weight: 700,
           style: "normal",
         },
+        // CJK fallback for the bilingual site description.
+        ...(await getOgFonts()),
       ],
     }
   );

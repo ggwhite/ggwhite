@@ -10,6 +10,7 @@ import Footer from "@/components/Footer.astro";
 import Pagination from "@/components/Pagination.astro";
 import { getSortedPosts } from "@/utils/getSortedPosts";
 import { useTranslations } from "@/i18n";
+import { pageTitle, pageSuffix } from "@/utils/seoSite";
 import config from "@/config";
 
 export const getStaticPaths = (async ({ paginate }) => {
@@ -21,9 +22,16 @@ const { page } = Astro.props;
 
 const locale = Astro.currentLocale ?? config.site.lang;
 const t = useTranslations(locale);
+
+const description =
+  `All ${page.total} TIL posts by White, newest first: real backend problems in Go, Java, Lua, DevOps and databases, each with the root cause and fix.` +
+  (page.currentPage > 1 ? ` Page ${page.currentPage} of ${page.lastPage}.` : "");
 ---
 
-<Layout title={`${t.pages.postsTitle} | ${config.site.title}`}>
+<Layout
+  title={pageTitle(`${t.pages.postsTitle}${pageSuffix(page.currentPage)}`)}
+  {description}
+>
   <Header />
 
   <Breadcrumb />

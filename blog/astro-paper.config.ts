@@ -10,9 +10,19 @@ export default defineAstroPaperConfig({
     author: "White (ggwhite)",
     profile: "https://github.com/ggwhite",
     ogImage: "og-image.png",
+    // UI strings / i18n routing locale.
     lang: "en",
+    // Document language: most posts are Traditional Chinese. /about and
+    // /projects override it with "en" (their copy is mostly English).
+    htmlLang: "zh-Hant",
     timezone: "Asia/Taipei",
     dir: "ltr",
+    // Search engine ownership tags. Paste only the `content` value; leave ""
+    // to omit the tag. Google: Search Console → Add property (URL prefix
+    // https://ggwhite.github.io/ggwhite/) → HTML tag. Bing: Webmaster Tools →
+    // Add site → HTML Meta Tag (msvalidate.01).
+    googleVerification: "",
+    bingVerification: "",
   },
   posts: {
     perPage: 10,
@@ -20,8 +30,9 @@ export default defineAstroPaperConfig({
   },
   features: {
     lightAndDarkMode: true,
-    // Satori ships no CJK font, so per-post OG images would render tofu.
-    dynamicOgImage: false,
+    // Per-post OG images; titles use the bundled Noto Sans TC subset
+    // (src/assets/fonts) so Chinese renders.
+    dynamicOgImage: true,
     showArchives: true,
     showBackButton: true,
     editPost: {
