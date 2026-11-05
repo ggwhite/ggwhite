@@ -22,6 +22,18 @@
 
 ## 主要成就
 
+### 架構規劃與技術決策
+* 規劃多平台系統架構，評估變更是否該做及其影響與風險，作為技術決策依據
+* 導入團隊共用知識庫與 AI agent 協作規則（Claude Code 與 Codex 共用同一套慣例）
+
+### 容器化遷移（2026/07 - 2026/10）
+* 將多個遊戲平台的遊戲服務與後台從裸機遷移至 Docker 容器（Docker Compose、healthcheck、環境變數注入設定）
+* 透過 GitLab tag pipeline 發布，映像檔推送至 Harbor / AWS ECR
+* 撰寫正式環境切換 runbook，並建立新舊環境 MySQL / Redis / MongoDB 資料比對與設定驗證腳本
+
+### 重複領獎 Bug 排查
+* 排查玩家重複領取活動獎勵的財損 bug，定位為併發競態（多請求同時通過檢查），設計 Redis 標記機制防止重複發放
+
 ### 平台現代化（獨立主導）
 * 以 Go 重寫 Lua/PHP/Java 混合遊戲平台，涵蓋 TCP gateway、遊戲引擎、BI 後台、支付服務
 * 設計多租戶 config-driven 架構，單一 codebase 支援 13 個平台，取代各自 fork 的 release branch
@@ -30,11 +42,11 @@
 
 ### MongoDB 效能優化
 * 診斷全集合掃描問題（每日約 270 萬筆資料）
-* 設計複合索引，實作 Lua Server 排程自動預建每日索引
+* 設計複合索引，實作 Lua Server 排程自動預建每日索引，並將修法推廣到其他大型集合
 
 ### Redis 架構優化
 * 將以 rid 為變數的 key 結構改為 Hash 結構（rid 作為 field）
-* 避免大量 SCAN 操作，提升查詢效率
+* 避免大量 SCAN 操作
 
 ### 資安強化
 * 調查 Redis 資料竄改事件，追蹤完整攻擊鏈（遊戲狀態偽造 + 出款紀錄竄改）
@@ -50,4 +62,4 @@
 * 開發 Linux 服務器部署腳本
 
 ### 人才培育
-* 帶領新進工程師，指導撰寫 test case，建立測試習慣
+* 透過 code review 與 pair programming 帶新人上手，指導撰寫 test case

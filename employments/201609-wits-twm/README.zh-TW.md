@@ -6,8 +6,8 @@
 
 ## 主要工作
 
-### 領導 2 名工程師 — Micro-service RESTful API（Golang / Java）
-* Pair Programming 協助成員成長
+### Micro-service RESTful API（Golang / Java）
+* 透過 Pair Programming 與 Code Review 協助 2 名工程師成長
 * OpenId 服務（Golang、Google APIs）
 * 商品服務（Java、Spring Boot、Golang、MSSQL、Memcached）
 * 金流服務（Golang、MSSQL、Memcached）

@@ -33,7 +33,9 @@
 
 | Tool | Usage |
 |------|-------|
-| Claude Code | AI pair programming, code generation, automated workflows (hooks, scripts) |
+| Claude Code | Main session plans and decides; subagents implement and independently verify; hooks, harness rule files |
+| Codex | Shares the same agent conventions as Claude Code |
+| memory-mcp | Self-built cross-session memory for AI agents |
 | GitHub Copilot | Inline code completion |
 
 ## Other Tools

@@ -4,8 +4,8 @@
 
 ## Summary
 
-### Led 2 Engineers — Micro-service RESTful API (Golang / Java)
-* Pair programming to support team growth
+### Micro-service RESTful API (Golang / Java)
+* Mentored 2 engineers through pair programming and code review
 * OpenId Service (Golang, Google APIs)
 * Product Service (Java, Spring Boot, Golang, MSSQL, Memcached)
 * Payment Service (Golang, MSSQL, Memcached)
