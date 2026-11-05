@@ -15,6 +15,10 @@ These are my TIL (Today I Learned) notes. Each post covers one problem I actuall
 
 這裡是我的 TIL 筆記，每篇記錄一個實際遇到的問題、根因與解法，大多以繁體中文撰寫。
 
+## Projects
+
+I build open-source tools along the way — a Go data-masking library and tooling for AI coding agents. See them all on the [Projects](/ggwhite/projects/) page.
+
 ## Elsewhere
 
 - GitHub: [github.com/ggwhite](https://github.com/ggwhite)

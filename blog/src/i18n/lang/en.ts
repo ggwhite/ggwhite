@@ -4,6 +4,7 @@ export default {
   nav: {
     home: "Home",
     posts: "Posts",
+    projects: "Projects",
     tags: "Tags",
     about: "About",
     archives: "Archives",
@@ -33,6 +34,8 @@ export default {
     featured: "Featured",
     recentPosts: "Recent Posts",
     allPosts: "All Posts",
+    featuredProjects: "Featured Projects",
+    allProjects: "All projects",
   },
   footer: {
     copyright: "Copyright",
@@ -47,6 +50,9 @@ export default {
 
     postsTitle: "Posts",
     postsDesc: "All the articles I've posted.",
+
+    projectsTitle: "Projects",
+    projectsDesc: "Open-source tools I build and use: Go libraries and tooling for AI coding agents.",
 
     archivesTitle: "Archives",
     archivesDesc: "All the articles I've archived.",

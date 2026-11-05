@@ -1,0 +1,73 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Header from "@/components/Header.astro";
+import Breadcrumb from "@/components/Breadcrumb.astro";
+import Main from "@/components/Main.astro";
+import Footer from "@/components/Footer.astro";
+import ProjectCard from "@/components/ProjectCard.astro";
+import { getProjects } from "@/utils/getProjects";
+import { useTranslations } from "@/i18n";
+import config from "@/config";
+
+const locale = Astro.currentLocale ?? config.site.lang;
+const t = useTranslations(locale);
+
+const projects = await getProjects();
+const featured = projects.filter(p => p.tier === "featured");
+const more = projects.filter(p => p.tier === "more");
+const earlier = projects.filter(p => p.tier === "earlier");
+---
+
+<Layout
+  title={`${t.pages.projectsTitle} | ${config.site.title}`}
+  description={t.pages.projectsDesc}
+>
+  <Header />
+
+  <Breadcrumb />
+
+  <Main pageTitle={t.pages.projectsTitle} pageDesc={t.pages.projectsDesc}>
+    <p class="-mt-4 mb-8 text-sm" lang="zh-Hant">
+      我自己寫、自己每天在用的開源工具。覺得有幫助的話，歡迎到 GitHub 給顆星。
+    </p>
+
+    <section aria-labelledby="featured-projects">
+      <h2 id="featured-projects" class="sr-only">Featured</h2>
+      <ul class="grid gap-4 sm:grid-cols-2">
+        {featured.map(project => <ProjectCard project={project} />)}
+      </ul>
+    </section>
+
+    {
+      more.length > 0 && (
+        <section aria-labelledby="more-projects" class="mt-12">
+          <h2 id="more-projects" class="text-xl font-semibold tracking-wide">
+            More tools
+          </h2>
+          <ul class="mt-4 grid gap-4 sm:grid-cols-2">
+            {more.map(project => (
+              <ProjectCard project={project} />
+            ))}
+          </ul>
+        </section>
+      )
+    }
+
+    {
+      earlier.length > 0 && (
+        <section aria-labelledby="earlier-work" class="mt-12">
+          <h2 id="earlier-work" class="text-xl font-semibold tracking-wide">
+            Earlier work
+          </h2>
+          <ul class="mt-4 grid gap-3 sm:grid-cols-2">
+            {earlier.map(project => (
+              <ProjectCard project={project} compact />
+            ))}
+          </ul>
+        </section>
+      )
+    }
+  </Main>
+
+  <Footer />
+</Layout>

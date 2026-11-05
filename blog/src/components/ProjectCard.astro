@@ -1,0 +1,147 @@
+---
+import { repoUrl, type Project } from "@/data/projects";
+
+type Props = {
+  project: Project;
+  /** Compact: name, pitch and meta only (home page, earlier work). */
+  compact?: boolean;
+  headingLevel?: "h2" | "h3";
+};
+
+const { project, compact = false, headingLevel: Heading = "h3" } = Astro.props;
+const { name, pitch, pitchZh, language, stars, archived, archivedNote } =
+  project;
+const url = repoUrl(name);
+
+const languageColors: Record<string, string> = {
+  Go: "#00ADD8",
+  TypeScript: "#3178C6",
+  JavaScript: "#F1E05A",
+  HTML: "#E34C26",
+  Java: "#B07219",
+};
+
+// Pitches use `backticks` for code; split them so they render as <code>.
+const pitchParts = pitch.split("`").map((text, i) => ({
+  text,
+  code: i % 2 === 1,
+}));
+const starLabel = `${stars} GitHub ${stars === 1 ? "star" : "stars"}`;
+---
+
+<li class="h-full min-w-0">
+  <article
+    class:list={[
+      "border-border bg-background flex h-full flex-col rounded-lg border",
+      "hover:border-accent/60 transition-colors",
+      compact ? "p-4" : "p-5",
+    ]}
+  >
+    <div class="flex flex-wrap items-center gap-x-3 gap-y-1">
+      <Heading class="text-lg font-semibold">
+        <a
+          href={url}
+          class="text-accent decoration-dashed underline-offset-4 hover:underline"
+        >
+          {name}
+        </a>
+      </Heading>
+      {
+        archived && (
+          <span class="border-border text-muted-foreground rounded-full border px-2 py-0.5 text-xs font-medium tracking-wide uppercase">
+            Archived
+          </span>
+        )
+      }
+    </div>
+
+    <p class:list={["mt-2", { "text-sm": compact }]}>
+      {
+        pitchParts.map(part =>
+          part.code ? (
+            <code class="bg-muted rounded px-1 font-mono text-[0.9em]">
+              {part.text}
+            </code>
+          ) : (
+            part.text
+          )
+        )
+      }
+    </p>
+    {
+      !compact && (
+        <p class="text-muted-foreground mt-1 text-sm" lang="zh-Hant">
+          {pitchZh}
+        </p>
+      )
+    }
+
+    {
+      !compact && archived && archivedNote && (
+        <p class="border-accent/50 text-muted-foreground mt-3 border-s-2 ps-3 text-sm italic">
+          {archivedNote}
+        </p>
+      )
+    }
+
+    {
+      !compact && project.install && (
+        <pre
+          class="bg-muted mt-4 rounded-md px-3 py-2 font-mono text-sm break-all whitespace-pre-wrap"
+          aria-label={`Install ${name}`}
+        ><code>{project.install}</code></pre>
+      )
+    }
+
+    <div
+      class="text-muted-foreground mt-auto flex flex-wrap items-center gap-x-4 gap-y-2 pt-4 text-sm"
+    >
+      <span class="inline-flex items-center gap-1.5">
+        <span
+          aria-hidden="true"
+          class="inline-block size-2.5 rounded-full"
+          style={`background-color: ${languageColors[language] ?? "currentColor"}`}
+        ></span>
+        {language}
+      </span>
+      <span class="inline-flex items-center gap-1" title={starLabel}>
+        <svg
+          aria-hidden="true"
+          viewBox="0 0 24 24"
+          width="16"
+          height="16"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linejoin="round"
+        >
+          <path
+            d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8-4.3-4.1 5.9-.9z"
+          ></path>
+        </svg>
+        <span class="sr-only">{starLabel}</span>
+        <span aria-hidden="true">{stars}</span>
+      </span>
+      <span class="ms-auto flex flex-wrap gap-x-4 gap-y-1">
+        {
+          project.homepage && !compact && (
+            <a
+              href={project.homepage.url}
+              class="hover:text-accent underline decoration-dashed underline-offset-4"
+            >
+              {project.homepage.label}
+              <span class="sr-only"> for {name}</span>
+            </a>
+          )
+        }
+        <a
+          href={url}
+          class="hover:text-accent underline decoration-dashed underline-offset-4"
+        >
+          {compact ? "View" : "Star"}
+          <span class="sr-only"> {name}</span> on GitHub
+        </a>
+      </span>
+    </div>
+  </article>
+</li>

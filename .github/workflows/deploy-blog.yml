@@ -8,6 +8,9 @@ on:
       - "til/**"
       - ".github/workflows/deploy-blog.yml"
   workflow_dispatch:
+  # Weekly rebuild so star counts on /projects stay fresh (Mondays 00:00 UTC).
+  schedule:
+    - cron: "0 0 * * 1"
 
 permissions:
   contents: read
@@ -31,6 +34,9 @@ jobs:
 
       - name: Build with Astro
         uses: withastro/action@v6
+        env:
+          # Raises the GitHub API rate limit for live star counts.
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           path: blog
           node-version: 24

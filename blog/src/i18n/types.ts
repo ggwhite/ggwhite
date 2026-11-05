@@ -2,6 +2,7 @@ export interface UIStrings {
   nav: {
     home: string;
     posts: string;
+    projects: string;
     tags: string;
     about: string;
     archives: string;
@@ -32,6 +33,8 @@ export interface UIStrings {
     featured: string;
     recentPosts: string;
     allPosts: string;
+    featuredProjects: string;
+    allProjects: string;
   };
   footer: {
     copyright: string;
@@ -46,6 +49,9 @@ export interface UIStrings {
 
     postsTitle: string;
     postsDesc: string;
+
+    projectsTitle: string;
+    projectsDesc: string;
 
     archivesTitle: string;
     archivesDesc: string;
