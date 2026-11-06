@@ -280,3 +280,43 @@ test("a short takeaway reads on within its own block to reach 50 chars", () => {
   );
   assert.equal(d, "搜尋把使用者輸入直接帶進 MATCH。參數綁定不等於跳脫。只要字串之後會被另一層語法解析，那一層要另外跳脫。");
 });
+
+// --- slug override ---
+
+test("a slug comment overrides the slug and is stripped from the body", () => {
+  const r = parseTil(
+    "# zsh 變數後接冒號會被當成 modifier\n\n**日期：** 2026-10-23\n<!-- slug: zsh-colon-after-variable-is-a-modifier -->\n\n## 問題\n\nx\n"
+  );
+  assert.equal(r.slug, "zsh-colon-after-variable-is-a-modifier");
+  assert.equal(r.date, "2026-10-23");
+  assert.ok(!r.body.includes("slug:"), r.body);
+  assert.ok(r.body.startsWith("## 問題"), r.body);
+});
+
+test("a slug comment between the H1 and the date line keeps the date", () => {
+  const r = parseTil("# T\n<!-- slug: my-post -->\n**Date:** 2026-01-02\n\nbody\n");
+  assert.equal(r.slug, "my-post");
+  assert.equal(r.date, "2026-01-02");
+  assert.equal(r.body, "body\n");
+});
+
+test("no slug comment: slug is null", () => {
+  assert.equal(parseTil("# T\n\n**日期：** 2026-01-01\n\nbody\n").slug, null);
+});
+
+test("a slug comment after the first ## heading is not an override", () => {
+  const r = parseTil("# T\n\n## H\n\n<!-- slug: not-me -->\n");
+  assert.equal(r.slug, null);
+  assert.ok(r.body.includes("<!-- slug: not-me -->"));
+});
+
+test("an invalid slug override is an error naming the source file", () => {
+  for (const bad of ["Upper-Case", "under_score", "trailing-", "a--b", "中文", "a".repeat(61)]) {
+    assert.throws(
+      () => parseTil(`# T\n<!-- slug: ${bad} -->\n`, { source: "shell/x.md" }),
+      err => err.message.includes("shell/x.md") && err.message.includes(bad),
+      bad
+    );
+  }
+  assert.equal(parseTil(`# T\n<!-- slug: ${"a".repeat(60)} -->\n`).slug, "a".repeat(60));
+});

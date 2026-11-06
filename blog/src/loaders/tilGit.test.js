@@ -8,10 +8,14 @@ import { fileURLToPath } from "node:url";
 import {
   gitFirstCommitDate,
   gitLastCommitDate,
+  tilEntries,
   tilLastModMap,
 } from "./tilGit.js";
 
-const tilDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../../../til");
+const tilDir = path.resolve(
+  path.dirname(fileURLToPath(import.meta.url)),
+  "../../../til"
+);
 
 test("gitLastCommitDate returns an ISO timestamp for a tracked file, null otherwise", () => {
   const map = tilLastModMap(tilDir);
@@ -76,4 +80,84 @@ test("moving a note keeps its first and last commit dates", t => {
   git(["commit", "-qam", "edit again"], "2024-04-05T13:00:00+08:00");
   assert.equal(gitFirstCommitDate(moved), "2024-01-02");
   assert.equal(gitLastCommitDate(moved), "2024-04-05T13:00:00+08:00");
+});
+
+test("commits marked [til-meta] don't change a note's dates", t => {
+  const { dir, git } = tempRepo(t);
+  const file = path.join(dir, "note.md");
+  writeFileSync(file, "# 標題\n\n**日期：** 2024-01-02\n\nbody\n");
+  git(["add", "."]);
+  git(["commit", "-qm", "add"], "2024-01-02T10:00:00+08:00");
+  writeFileSync(
+    file,
+    "# 標題\n\n**日期：** 2024-01-02\n<!-- slug: note -->\n\nbody\n"
+  );
+  git(
+    ["commit", "-qam", "chore(til): add slugs [til-meta]"],
+    "2024-05-06T10:00:00+08:00"
+  );
+  assert.equal(gitFirstCommitDate(file), "2024-01-02");
+  assert.equal(gitLastCommitDate(file), "2024-01-02T10:00:00+08:00");
+});
+
+test("tilEntries uses a slug override and keeps the derived slug as legacy", t => {
+  const dir = mkdtempSync(path.join(os.tmpdir(), "tilentries-"));
+  t.after(() => rmSync(dir, { recursive: true, force: true }));
+  mkdirSync(path.join(dir, "shell"));
+  writeFileSync(
+    path.join(dir, "shell", "zsh 筆記.md"),
+    "# zsh 筆記\n\n**日期：** 2026-01-01\n<!-- slug: zsh-notes -->\n"
+  );
+  writeFileSync(path.join(dir, "plain-ascii.md"), "# Plain\n");
+  const entries = tilEntries(dir).sort((a, b) => a.slug.localeCompare(b.slug));
+  assert.deepEqual(
+    entries.map(({ rel, slug, legacySlug }) => ({ rel, slug, legacySlug })),
+    [
+      { rel: "plain-ascii.md", slug: "plain-ascii", legacySlug: null },
+      {
+        rel: path.join("shell", "zsh 筆記.md"),
+        slug: "zsh-notes",
+        legacySlug: "zsh-筆記",
+      },
+    ]
+  );
+});
+
+test("tilEntries rejects a slug override that duplicates another post's slug", t => {
+  const dir = mkdtempSync(path.join(os.tmpdir(), "tilentries-"));
+  t.after(() => rmSync(dir, { recursive: true, force: true }));
+  writeFileSync(path.join(dir, "taken.md"), "# Taken\n");
+  writeFileSync(path.join(dir, "中文.md"), "# 中文\n<!-- slug: taken -->\n");
+  assert.throws(() => tilEntries(dir), /duplicate slug "taken"/);
+});
+
+test("tilEntries rejects two files deriving the same slug", t => {
+  const dir = mkdtempSync(path.join(os.tmpdir(), "tilentries-"));
+  t.after(() => rmSync(dir, { recursive: true, force: true }));
+  mkdirSync(path.join(dir, "a"));
+  writeFileSync(path.join(dir, "a", "same.md"), "# A\n");
+  writeFileSync(path.join(dir, "Same.md"), "# B\n");
+  assert.throws(() => tilEntries(dir), /duplicate slug "same"/);
+});
+
+test("tilEntries rejects an override that equals another post's old slug", t => {
+  const dir = mkdtempSync(path.join(os.tmpdir(), "tilentries-"));
+  t.after(() => rmSync(dir, { recursive: true, force: true }));
+  writeFileSync(path.join(dir, "old-x.md"), "# X\n<!-- slug: new-x -->\n");
+  writeFileSync(path.join(dir, "y.md"), "# Y\n<!-- slug: old-x -->\n");
+  assert.throws(() => tilEntries(dir), /slug "old-x"/);
+});
+
+test("tilLastModMap is keyed by the override slug", t => {
+  const { dir, git } = tempRepo(t);
+  writeFileSync(
+    path.join(dir, "zsh 筆記.md"),
+    "# zsh\n<!-- slug: zsh-notes -->\n"
+  );
+  git(["add", "."]);
+  git(["commit", "-qm", "add"], "2024-01-02T10:00:00+08:00");
+  assert.deepEqual(
+    [...tilLastModMap(dir).entries()],
+    [["zsh-notes", "2024-01-02T10:00:00+08:00"]]
+  );
 });

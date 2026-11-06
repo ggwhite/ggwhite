@@ -21,6 +21,9 @@ const posts = defineCollection({
       draft: z.boolean().optional(),
       // The til/ folder the note sits in; see src/data/categories.ts.
       category: z.string(),
+      // Filename-derived slug replaced by a `<!-- slug: -->` override; its
+      // old URL gets a redirect stub (src/pages/posts/[legacySlug].astro).
+      legacySlug: z.string().optional(),
       tags: z.array(z.string()).default(["others"]),
       ogImage: image().or(z.string()).optional(),
       description: z.string(),

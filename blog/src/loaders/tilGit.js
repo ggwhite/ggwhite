@@ -1,7 +1,7 @@
 import { execFileSync } from "node:child_process";
-import { readdirSync, realpathSync } from "node:fs";
+import { readFileSync, readdirSync, realpathSync } from "node:fs";
 import path from "node:path";
-import { tilSlug } from "./parseTil.js";
+import { tilSlug, tilSlugOverride } from "./parseTil.js";
 
 /** Markdown notes under `dir`, skipping dot/underscore entries and README.md. */
 export function walkTil(dir) {
@@ -12,6 +12,36 @@ export function walkTil(dir) {
     return /\.md$/i.test(d.name) && d.name.toLowerCase() !== "readme.md"
       ? [full]
       : [];
+  });
+}
+
+/**
+ * Every note under `dir` with its URL slug: the `<!-- slug: ... -->` override
+ * when present, else derived from the filename. `legacySlug` is the derived
+ * slug an override replaced (its old URL gets a redirect stub), else null.
+ * @returns {{ file: string, rel: string, slug: string, legacySlug: string | null }[]}
+ * @throws on an invalid override, or when two notes (or a note and another
+ *   note's legacy URL) share a slug
+ */
+export function tilEntries(dir) {
+  const seen = new Map();
+  const claim = (slug, rel) => {
+    if (seen.has(slug)) {
+      throw new Error(
+        `til-loader: duplicate slug "${slug}" for ${rel} and ${seen.get(slug)}`
+      );
+    }
+    seen.set(slug, rel);
+  };
+  return walkTil(dir).map(file => {
+    const rel = path.relative(dir, file);
+    const derived = tilSlug(path.basename(file));
+    const override = tilSlugOverride(readFileSync(file, "utf8"), rel);
+    const slug = override ?? derived;
+    const legacySlug = override && override !== derived ? derived : null;
+    claim(slug, rel);
+    if (legacySlug) claim(legacySlug, `${rel} (old URL)`);
+    return { file, rel, slug, legacySlug };
   });
 }
 
@@ -61,6 +91,11 @@ function gitContentDates(file) {
     "log",
     "--follow",
     "-M",
+    // Metadata-only commits (slug/description lines) say "[til-meta]" in the
+    // message and don't count as edits.
+    "--invert-grep",
+    "--fixed-strings",
+    "--grep=[til-meta]",
     "--format=%x01%aI",
     "--name-status",
     "--",
@@ -89,9 +124,9 @@ export function gitLastCommitDate(file) {
 /** Post slug → last-commit ISO timestamp, for every tracked note under `dir`. */
 export function tilLastModMap(dir) {
   const map = new Map();
-  for (const file of walkTil(dir)) {
+  for (const { file, slug } of tilEntries(dir)) {
     const date = gitLastCommitDate(file);
-    if (date) map.set(tilSlug(path.basename(file)), date);
+    if (date) map.set(slug, date);
   }
   return map;
 }

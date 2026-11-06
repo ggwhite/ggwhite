@@ -1,4 +1,5 @@
 ---
+import RedirectStub from "@/components/RedirectStub.astro";
 import { legacyTagRedirects } from "@/data/categories";
 import { getAssetPath } from "@/utils/withBase";
 
@@ -16,23 +17,6 @@ export function getStaticPaths() {
 }
 
 const { to } = Astro.props;
-const target = getAssetPath(to);
-const canonical = new URL(target, Astro.site).href;
 ---
 
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Redirecting…</title>
-    <meta name="robots" content="noindex" />
-    <link rel="canonical" href={canonical} />
-    <meta http-equiv="refresh" content={`0;url=${target}`} />
-    <script is:inline define:vars={{ target }}>
-      location.replace(target);
-    </script>
-  </head>
-  <body>
-    <p>Moved to <a href={target}>{canonical}</a>.</p>
-  </body>
-</html>
+<RedirectStub target={getAssetPath(to)} />

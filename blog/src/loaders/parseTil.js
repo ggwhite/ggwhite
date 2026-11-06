@@ -14,6 +14,14 @@ const TAKEAWAY_RES = [/^(?:關鍵洞察|Key Insights?)$/i, /^(?:解法|Solution|
  * rendered); its text is used verbatim as the meta description.
  */
 const OVERRIDE_RE = /<!--\s*description:\s*([\s\S]*?)\s*-->/i;
+/**
+ * A TIL file may also carry `<!-- slug: ascii-kebab-slug -->` on its own line
+ * before the first `## ` heading; it replaces the filename-derived URL slug
+ * (see tilEntries in tilGit.js) and is stripped from the rendered body.
+ */
+const SLUG_LINE_RE = /^<!--\s*slug:\s*(.*?)\s*-->$/i;
+const SLUG_RE = /^[a-z0-9]+(-[a-z0-9]+)*$/;
+const SLUG_MAX = 60;
 /** Meta-description bounds, in characters (code points). */
 const DESC_MAX = 150;
 const DESC_MIN = 50;
@@ -345,12 +353,48 @@ function sections(lines) {
 }
 
 /**
+ * Find the `<!-- slug: ... -->` line before the first `## ` heading.
+ * @param {string[]} lines
+ * @param {string} [source] file name for error messages
+ * @returns {{ slug: string, index: number } | null}
+ * @throws when the slug is not lowercase ASCII kebab-case of at most SLUG_MAX chars
+ */
+function findSlugLine(lines, source = "TIL note") {
+  for (let i = 0; i < lines.length; i++) {
+    const t = lines[i].trim();
+    if (/^##\s/.test(t)) break;
+    const m = t.match(SLUG_LINE_RE);
+    if (!m) continue;
+    if (!SLUG_RE.test(m[1]) || m[1].length > SLUG_MAX) {
+      throw new Error(
+        `${source}: invalid slug "${m[1]}" (want lowercase a-z0-9 kebab-case, at most ${SLUG_MAX} chars)`
+      );
+    }
+    return { slug: m[1], index: i };
+  }
+  return null;
+}
+
+const splitLines = raw => raw.replace(/^﻿/, "").replace(/\r\n?/g, "\n").split("\n");
+
+/**
+ * The slug override of a TIL file, or null when it has none.
  * @param {string} raw
- * @param {{ fallbackTitle?: string }} [opts]
- * @returns {{ title: string, date: string | null, body: string, description: string }}
+ * @param {string} [source] file name for error messages
+ */
+export function tilSlugOverride(raw, source) {
+  return findSlugLine(splitLines(raw), source)?.slug ?? null;
+}
+
+/**
+ * @param {string} raw
+ * @param {{ fallbackTitle?: string, source?: string }} [opts]
+ * @returns {{ title: string, date: string | null, slug: string | null, body: string, description: string }}
  */
 export function parseTil(raw, opts = {}) {
-  const lines = raw.replace(/^﻿/, "").replace(/\r\n?/g, "\n").split("\n");
+  const lines = splitLines(raw);
+  const slugLine = findSlugLine(lines, opts.source);
+  if (slugLine) lines.splice(slugLine.index, 1);
   let title = null;
   let date = null;
   let i = 0;
@@ -402,6 +446,7 @@ export function parseTil(raw, opts = {}) {
   return {
     title: finalTitle,
     date,
+    slug: slugLine?.slug ?? null,
     body,
     description,
   };

@@ -2,8 +2,8 @@ import { readFileSync, statSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import type { Loader } from "astro/loaders";
-import { parseTil, tilSlug } from "./parseTil.js";
-import { gitFirstCommitDate, gitLastCommitDate, walkTil } from "./tilGit.js";
+import { parseTil } from "./parseTil.js";
+import { gitFirstCommitDate, gitLastCommitDate, tilEntries } from "./tilGit.js";
 
 interface TilLoaderOptions {
   /** Directory holding the TIL markdown, relative to the Astro project root. */
@@ -40,25 +40,18 @@ export function tilLoader({
 
       const loadAll = async () => {
         store.clear();
-        const seen = new Map<string, string>();
-        for (const file of walkTil(baseDir)) {
-          const rel = path.relative(baseDir, file);
+        // Slugs (override or filename-derived) are validated and deduped here.
+        const entries = tilEntries(baseDir);
+        for (const { file, rel, slug: id, legacySlug } of entries) {
           const fileName = path.basename(file);
           const segments = rel.split(path.sep);
           const category =
             segments.length > 1 ? segments[0].toLowerCase() : defaultCategory;
-          const id = tilSlug(fileName);
-
-          if (seen.has(id)) {
-            throw new Error(
-              `til-loader: duplicate slug "${id}" for ${rel} and ${seen.get(id)}`
-            );
-          }
-          seen.set(id, rel);
 
           const raw = readFileSync(file, "utf8");
           const parsed = parseTil(raw, {
             fallbackTitle: fileName.replace(/\.md$/i, ""),
+            source: rel,
           });
           let date = parsed.date ?? gitFirstCommitDate(file);
           if (!date) {
@@ -86,6 +79,7 @@ export function tilLoader({
               description: parsed.description,
               category,
               tags: [category],
+              ...(legacySlug ? { legacySlug } : {}),
             },
           });
           store.set({
@@ -99,7 +93,7 @@ export function tilLoader({
             }),
           });
         }
-        logger.info(`Loaded ${seen.size} TIL notes from ${base}`);
+        logger.info(`Loaded ${entries.length} TIL notes from ${base}`);
       };
 
       await loadAll();

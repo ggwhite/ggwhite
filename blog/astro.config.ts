@@ -22,13 +22,21 @@ import {
   rehypeInlineToc,
 } from "./src/utils/rehypeInlineToc";
 import { rehypeExternalLinks } from "./src/utils/rehypeExternalLinks";
-import { tilLastModMap } from "./src/loaders/tilGit";
+import { tilEntries, tilLastModMap } from "./src/loaders/tilGit";
 import config from "./astro-paper.config";
 
+const tilDir = fileURLToPath(new URL("../til", import.meta.url));
 // Post slug → last git commit of its note, for sitemap <lastmod>.
-const postLastMod = tilLastModMap(
-  fileURLToPath(new URL("../til", import.meta.url))
+const postLastMod = tilLastModMap(tilDir);
+// Old post slugs replaced by a `<!-- slug: -->` override; their pages are
+// redirect stubs (src/pages/posts/[legacySlug].astro).
+const legacyPostSlugs = new Set(
+  tilEntries(tilDir).flatMap(e => (e.legacySlug ? [e.legacySlug] : []))
 );
+const postSlugOf = (page: string) => {
+  const slug = page.match(/\/posts\/([^/]+)\/?$/)?.[1];
+  return slug && decodeURIComponent(slug);
+};
 
 export default defineConfig({
   site: config.site.url,
@@ -37,15 +45,17 @@ export default defineConfig({
   integrations: [
     mdx(),
     sitemap({
-      // /tags/ pages are redirect stubs to /categories/ (see src/pages/tags).
+      // /tags/ pages are redirect stubs to /categories/ (see src/pages/tags),
+      // and so are old post URLs (see src/pages/posts/[legacySlug].astro).
       filter: page =>
         !/\/search\/?$/.test(page) &&
         !/\/tags(\/|$)/.test(page) &&
+        !legacyPostSlugs.has(postSlugOf(page) || "") &&
         (config.features?.showArchives !== false ||
           !/\/archives\/?$/.test(page)),
       serialize: item => {
-        const slug = item.url.match(/\/posts\/([^/]+)\/?$/)?.[1];
-        const lastmod = slug && postLastMod.get(decodeURIComponent(slug));
+        const slug = postSlugOf(item.url);
+        const lastmod = slug && postLastMod.get(slug);
         return lastmod ? { ...item, lastmod } : item;
       },
     }),

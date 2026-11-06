@@ -1,0 +1,24 @@
+---
+import { getCollection } from "astro:content";
+import RedirectStub from "@/components/RedirectStub.astro";
+import { getPostUrl } from "@/utils/getPostPaths";
+import config from "@/config";
+
+// Posts whose filename-derived slug had non-ASCII text now carry a
+// `<!-- slug: -->` override. Their old URLs (percent-encoded in links and
+// search results) get a stub that forwards to the new one; astro.config.ts
+// leaves these out of the sitemap.
+export async function getStaticPaths() {
+  const posts = await getCollection("posts");
+  return posts
+    .filter(post => post.data.legacySlug)
+    .map(post => ({
+      params: { legacySlug: post.data.legacySlug },
+      props: { target: getPostUrl(post.id, post.filePath, config.site.lang) },
+    }));
+}
+
+const { target } = Astro.props;
+---
+
+<RedirectStub {target} />
