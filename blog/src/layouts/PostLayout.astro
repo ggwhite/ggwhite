@@ -1,6 +1,6 @@
 ---
 import Layout from "./Layout.astro";
-import { slugifyStr } from "@/utils/slugify";
+import { getCategory } from "@/data/categories";
 import { seoSite, pageTitle } from "@/utils/seoSite";
 import { blogPostingSchema, breadcrumbSchema } from "@/utils/seo";
 
@@ -13,7 +13,8 @@ type Props = {
   pubDatetime: Date;
   /** Last git commit of the source note (falls back to pubDatetime). */
   lastModified?: Date;
-  tags: string[];
+  /** Category slug (the note's til/ folder). */
+  category: string;
   lang: string;
 };
 
@@ -24,9 +25,11 @@ const {
   canonicalURL,
   pubDatetime,
   lastModified = pubDatetime,
-  tags,
+  category: categorySlug,
   lang,
 } = Astro.props;
+
+const category = getCategory(categorySlug);
 
 const jsonLd = [
   blogPostingSchema(seoSite, {
@@ -36,12 +39,12 @@ const jsonLd = [
     image: ogImage,
     datePublished: pubDatetime,
     dateModified: lastModified,
-    tags,
+    tags: [category.label],
     lang,
   }),
   breadcrumbSchema(seoSite, [
     { name: "Home", path: "" },
-    ...tags.slice(0, 1).map(tag => ({ name: tag, path: `tags/${slugifyStr(tag)}/` })),
+    { name: category.label, path: `categories/${category.slug}/` },
     { name: title, path: canonicalURL },
   ]),
 ];
@@ -66,7 +69,8 @@ const jsonLd = [
       property="article:modified_time"
       content={lastModified.toISOString()}
     />
-    {tags.map(tag => <meta property="article:tag" content={tag} />)}
+    <meta property="article:section" content={category.label} />
+    <meta property="article:tag" content={category.label} />
   </Fragment>
 
   <slot />

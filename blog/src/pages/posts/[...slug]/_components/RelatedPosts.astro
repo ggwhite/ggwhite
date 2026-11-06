@@ -1,9 +1,15 @@
 ---
 import { getPostUrl } from "@/utils/getPostPaths";
+import CategoryChip from "@/components/CategoryChip.astro";
 import config from "@/config";
 
 type Props = {
-  posts: { id: string; title: string; filePath: string | undefined }[];
+  posts: {
+    id: string;
+    title: string;
+    filePath: string | undefined;
+    category: string;
+  }[];
 };
 
 const { posts } = Astro.props;
@@ -12,11 +18,7 @@ const locale = Astro.currentLocale ?? config.site.lang;
 
 {
   posts.length > 0 && (
-    <section
-      data-pagefind-ignore
-      aria-labelledby="related-posts"
-      class="my-8"
-    >
+    <section data-pagefind-ignore aria-labelledby="related-posts" class="my-8">
       <h2 id="related-posts" class="text-xl font-semibold tracking-wide">
         Related posts
       </h2>
@@ -28,7 +30,8 @@ const locale = Astro.currentLocale ?? config.site.lang;
               class="text-accent decoration-dashed underline-offset-4 hover:underline"
             >
               {p.title}
-            </a>
+            </a>{" "}
+            <CategoryChip category={p.category} class="ms-1 align-middle" />
           </li>
         ))}
       </ul>

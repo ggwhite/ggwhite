@@ -84,6 +84,7 @@ export function tilLoader({
               pubDatetime,
               lastModified,
               description: parsed.description,
+              category,
               tags: [category],
             },
           });

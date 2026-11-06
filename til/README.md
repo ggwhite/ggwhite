@@ -4,9 +4,14 @@
 
 ## 分類
 
-- [Golang](golang/)
-- [Java](java/)
-- [Lua](lua/)
-- [DevOps](devops/)
+- [AI Agents](ai-agents/)
+- [Shell](shell/)
+- [macOS](macos/)
+- [Engineering Practices](practices/)
 - [Database](database/)
-- [General](general/)
+- [DevOps](devops/)
+- [Media](media/)
+- [Go](golang/)
+- [Lua](lua/)
+- [Java](java/)
+- [Security](security/)

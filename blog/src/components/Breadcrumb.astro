@@ -2,6 +2,7 @@
 import { getRelativeLocaleUrl } from "astro:i18n";
 import { stripBase, stripLocale } from "@/utils/withBase";
 import { useTranslations } from "@/i18n";
+import { getCategory } from "@/data/categories";
 import config from "@/config";
 
 const locale = Astro.currentLocale ?? config.site.lang;
@@ -27,7 +28,7 @@ const decodeSegment = (value: string) => {
 const navLabels: Record<string, string> = {
   posts: t.nav.posts,
   projects: t.nav.projects,
-  tags: t.nav.tags,
+  categories: t.nav.categories,
   about: t.nav.about,
   archives: t.nav.archives,
   search: t.nav.search,
@@ -43,17 +44,17 @@ if (breadcrumbList[0] === "posts") {
   );
 }
 
-// if breadcrumb is Home > Tags > [tag] > [page] <etc>
-// replace [tag] > [page] with localized [tag] (page number)
-if (breadcrumbList[0] === "tags" && !isNaN(Number(breadcrumbList[2]))) {
+// if breadcrumb is Home > Categories > [category] > [page] <etc>
+// show the category label, plus "(page N)" past the first page
+if (breadcrumbList[0] === "categories" && breadcrumbList[1]) {
+  const { label } = getCategory(decodeSegment(breadcrumbList[1]));
+  const pageNo = Number(breadcrumbList[2]);
   breadcrumbList.splice(
     1,
     3,
-    `${decodeSegment(breadcrumbList[1])} ${
-      Number(breadcrumbList[2]) === 1
-        ? ""
-        : `(${t.pagination.page.toLowerCase()} ${breadcrumbList[2]})`
-    }`
+    pageNo > 1
+      ? `${label} (${t.pagination.page.toLowerCase()} ${pageNo})`
+      : label
   );
 }
 ---
@@ -73,10 +74,9 @@ if (breadcrumbList[0] === "tags" && !isNaN(Number(breadcrumbList[2]))) {
         index + 1 === breadcrumbList.length ? (
           <li>
             <span
-              class:list={["capitalize opacity-75", { lowercase: index > 0 }]}
+              class:list={["opacity-75", { capitalize: index === 0 }]}
               aria-current="page"
             >
-              {/* make the last part lowercase in Home > Tags > some-tag */}
               {navLabels[breadcrumb] ?? decodeSegment(breadcrumb)}
             </span>
           </li>

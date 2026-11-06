@@ -1,0 +1,38 @@
+---
+import { legacyTagRedirects } from "@/data/categories";
+import { getAssetPath } from "@/utils/withBase";
+
+// Posts used to be tagged with their folder name. Those listing URLs now
+// point at the matching category; these stubs keep old links and search
+// results working without being indexed themselves (and are left out of the
+// sitemap in astro.config.ts).
+export function getStaticPaths() {
+  return legacyTagRedirects().map(({ from, to }) => ({
+    params: {
+      path: from.replace(/^tags\/?/, "").replace(/\/$/, "") || undefined,
+    },
+    props: { to },
+  }));
+}
+
+const { to } = Astro.props;
+const target = getAssetPath(to);
+const canonical = new URL(target, Astro.site).href;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Redirecting…</title>
+    <meta name="robots" content="noindex" />
+    <link rel="canonical" href={canonical} />
+    <meta http-equiv="refresh" content={`0;url=${target}`} />
+    <script is:inline define:vars={{ target }}>
+      location.replace(target);
+    </script>
+  </head>
+  <body>
+    <p>Moved to <a href={target}>{canonical}</a>.</p>
+  </body>
+</html>

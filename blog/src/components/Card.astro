@@ -3,6 +3,7 @@ import type { CollectionEntry } from "astro:content";
 import { getPostUrl } from "@/utils/getPostPaths";
 import { toTransitionName } from "@/utils/toTransitionName";
 import Datetime from "./Datetime.astro";
+import CategoryChip from "./CategoryChip.astro";
 
 type Props = {
   variant?: "h2" | "h3";
@@ -26,6 +27,9 @@ const { title, description, ...props } = data;
       {title}
     </Heading>
   </a>
-  <Datetime {...props} />
+  <div class="flex flex-wrap items-center gap-x-3 gap-y-1">
+    <Datetime {...props} />
+    <CategoryChip category={data.category} />
+  </div>
   <p>{description}</p>
 </li>

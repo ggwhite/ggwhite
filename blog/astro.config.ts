@@ -37,8 +37,10 @@ export default defineConfig({
   integrations: [
     mdx(),
     sitemap({
+      // /tags/ pages are redirect stubs to /categories/ (see src/pages/tags).
       filter: page =>
         !/\/search\/?$/.test(page) &&
+        !/\/tags(\/|$)/.test(page) &&
         (config.features?.showArchives !== false ||
           !/\/archives\/?$/.test(page)),
       serialize: item => {

@@ -3,6 +3,7 @@ import { getCollection, type CollectionEntry } from "astro:content";
 import satori from "satori";
 import sharp from "sharp";
 import { getPostSlug } from "@/utils/getPostPaths";
+import { getCategory } from "@/data/categories";
 import { postFilter } from "@/utils/postFilter";
 import { getOgFonts, OG_FONT_FAMILY } from "@/utils/ogFonts";
 import config from "@/config";
@@ -32,7 +33,8 @@ export const GET: APIRoute = async ({ props }) => {
   const { data } = props as CollectionEntry<"posts">;
   const title = data.title;
   // Long titles shrink so they stay within three lines.
-  const titleSize = [...title].length > 40 ? 52 : [...title].length > 24 ? 60 : 68;
+  const titleSize =
+    [...title].length > 40 ? 52 : [...title].length > 24 ? 60 : 68;
 
   const svg = await satori(
     {
@@ -57,7 +59,7 @@ export const GET: APIRoute = async ({ props }) => {
             type: "div",
             props: {
               style: { display: "flex", gap: "16px", fontSize: 28 },
-              children: data.tags.map(tag => ({
+              children: [getCategory(data.category).label].map(label => ({
                 type: "span",
                 props: {
                   style: {
@@ -66,7 +68,7 @@ export const GET: APIRoute = async ({ props }) => {
                     borderRadius: "8px",
                     padding: "4px 16px",
                   },
-                  children: `#${tag}`,
+                  children: label,
                 },
               })),
             },

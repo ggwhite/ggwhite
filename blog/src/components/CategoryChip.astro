@@ -1,0 +1,35 @@
+---
+import { getRelativeLocaleUrl } from "astro:i18n";
+import { getCategory } from "@/data/categories";
+import config from "@/config";
+
+type Props = {
+  /** Category slug (the post's til/ folder). */
+  category: string;
+  /** Post count shown after the label, e.g. on the posts list filter row. */
+  count?: number;
+  class?: string;
+};
+
+const { category, count, class: className } = Astro.props;
+const { slug, label } = getCategory(category);
+
+const locale = Astro.currentLocale ?? config.site.lang;
+---
+
+<a
+  href={getRelativeLocaleUrl(locale, `categories/${slug}/`)}
+  class:list={[
+    "inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 text-xs font-medium",
+    "border-border bg-muted text-foreground border",
+    "hover:border-accent hover:text-accent focus-visible:text-accent",
+    className,
+  ]}
+>
+  {label}
+  {
+    count !== undefined && (
+      <span class="text-muted-foreground tabular-nums">{count}</span>
+    )
+  }
+</a>

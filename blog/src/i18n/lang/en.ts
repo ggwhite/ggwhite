@@ -6,6 +6,7 @@ export default {
     posts: "Posts",
     projects: "Projects",
     tags: "Tags",
+    categories: "Categories",
     about: "About",
     archives: "Archives",
     search: "Search",
@@ -48,11 +49,18 @@ export default {
     tagsTitle: "Tags",
     tagsDesc: "All the tags used in posts.",
 
+    categoryTitle: "Category",
+    categoryDesc: "All the articles in",
+
+    categoriesTitle: "Categories",
+    categoriesDesc: "Every post sits in one category, by topic.",
+
     postsTitle: "Posts",
     postsDesc: "All the articles I've posted.",
 
     projectsTitle: "Projects",
-    projectsDesc: "Open-source tools I build and use: Go libraries and tooling for AI coding agents.",
+    projectsDesc:
+      "Open-source tools I build and use: Go libraries and tooling for AI coding agents.",
 
     archivesTitle: "Archives",
     archivesDesc: "All the articles I've archived.",

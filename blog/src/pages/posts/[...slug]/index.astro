@@ -4,10 +4,9 @@ import PostLayout from "@/layouts/PostLayout.astro";
 import Header from "@/components/Header.astro";
 import Footer from "@/components/Footer.astro";
 import Datetime from "@/components/Datetime.astro";
-import Tag from "@/components/Tag.astro";
+import CategoryChip from "@/components/CategoryChip.astro";
 import { getPostSlug, getPostUrl } from "@/utils/getPostPaths";
 import { getSortedPosts } from "@/utils/getSortedPosts";
-import { slugifyStr } from "@/utils/slugify";
 import { toTransitionName } from "@/utils/toTransitionName";
 import EditPost from "./_components/EditPost.astro";
 import ShareLinks from "./_components/ShareLinks.astro";
@@ -32,6 +31,7 @@ export async function getStaticPaths() {
         id: p.id,
         title: p.data.title,
         filePath: p.filePath,
+        category: p.data.category,
       })),
       // sortedPosts is newest-first, so "older" (prev) is a higher index
       // and "newer" (next) is a lower index.
@@ -63,7 +63,7 @@ type AdjacentPost = {
 
 type Props = {
   post: CollectionEntry<"posts">;
-  relatedPosts: NonNullable<AdjacentPost>[];
+  relatedPosts: (NonNullable<AdjacentPost> & { category: string })[];
   prevPost: AdjacentPost;
   nextPost: AdjacentPost;
 };
@@ -80,7 +80,7 @@ const {
   modDatetime,
   lastModified,
   timezone,
-  tags,
+  category,
   hideEditPost,
   hideToc,
 } = post.data;
@@ -119,7 +119,7 @@ const lang = detectLang(title, description);
   canonicalURL={canonicalURL ?? new URL(Astro.url.pathname, Astro.site).href}
   {pubDatetime}
   {lastModified}
-  {tags}
+  {category}
   {lang}
 >
   <Header />
@@ -138,8 +138,9 @@ const lang = detectLang(title, description);
       {title}
     </h1>
 
-    <div class="my-2 flex items-center gap-2">
+    <div class="my-2 flex flex-wrap items-center gap-2">
       <Datetime {pubDatetime} {modDatetime} {timezone} size="lg" />
+      <CategoryChip {category} />
       <span
         aria-hidden="true"
         class:list={[
@@ -172,13 +173,7 @@ const lang = detectLang(title, description);
 
     <div class="sm:my-8 sm:flex sm:items-start sm:justify-between sm:gap-8">
       <div class="mt-4 mb-8 flex items-start justify-between gap-4 sm:my-0">
-        <ul class="flex flex-wrap gap-4">
-          {
-            tags.map(tag => (
-              <Tag tag={slugifyStr(tag)} tagName={tag} size="sm" />
-            ))
-          }
-        </ul>
+        <CategoryChip {category} />
         <EditPost class="flex-none sm:hidden" {hideEditPost} {post} />
       </div>
 
