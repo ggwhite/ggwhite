@@ -1,0 +1,26 @@
+name: Update README latest posts
+
+on:
+  workflow_run:
+    workflows: ["Deploy blog to GitHub Pages"]
+    types: [completed]
+  schedule:
+    - cron: "0 1 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: gautamkrishnar/blog-post-workflow@1.9.7
+        with:
+          feed_list: "https://ggwhite.github.io/ggwhite/rss.xml"
+          readme_path: "./README.md,./README.zh-TW.md"
+          max_post_count: 5
+          template: "- [$title]($url)$newline"
+          commit_message: "docs: update latest blog posts"
