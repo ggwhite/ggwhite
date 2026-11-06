@@ -1,6 +1,7 @@
 # 要 LLM 比對兩件事，得先讓它分別寫下來
 
 **日期：** 2026-08-07
+<!-- slug: make-llm-write-each-side-before-comparing -->
 
 ## 問題
 

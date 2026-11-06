@@ -1,6 +1,7 @@
 # instaloader 的 get_posts() 看不到 Reels 分頁
 
 **日期：** 2026-09-17
+<!-- slug: instaloader-get-posts-misses-reels -->
 
 ## 問題
 

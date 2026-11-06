@@ -1,6 +1,7 @@
 # Agent 的 bash 跑在 macOS Background session，讀不到 Keychain
 
 **日期：** 2026-09-17
+<!-- slug: agent-background-session-cannot-read-keychain -->
 
 ## 問題
 

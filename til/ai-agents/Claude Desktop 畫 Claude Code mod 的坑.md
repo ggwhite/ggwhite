@@ -1,6 +1,7 @@
 # Claude Desktop 畫 Claude Code mod 的坑
 
 **日期：** 2026-10-15
+<!-- slug: claude-code-mod-pitfalls-in-claude-desktop -->
 
 ## 問題
 

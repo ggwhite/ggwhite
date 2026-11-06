@@ -1,6 +1,7 @@
 # Prompt 會長大，寫死的 timeout 遲早被跨過
 
 **日期：** 2026-08-27
+<!-- slug: prompts-grow-past-hardcoded-timeouts -->
 
 ## 問題
 

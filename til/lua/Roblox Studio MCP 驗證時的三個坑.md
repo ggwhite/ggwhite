@@ -1,6 +1,7 @@
 # Roblox Studio MCP 驗證時的三個坑
 
 **日期：** 2026-10-04
+<!-- slug: roblox-studio-mcp-verification-pitfalls -->
 
 ## 問題
 

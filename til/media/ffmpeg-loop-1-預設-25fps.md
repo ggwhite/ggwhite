@@ -1,6 +1,7 @@
 # ffmpeg `-loop 1` 的預設輸入幀率是 25，`zoompan` 的 `fps` 救不回來
 
 **日期：** 2026-08-04
+<!-- slug: ffmpeg-loop-1-defaults-to-25fps -->
 
 ## 問題
 

@@ -1,6 +1,7 @@
 # flock 的 fd 會被子進程繼承，讓 cron 監控靜默死亡
 
 **日期：** 2026-09-12
+<!-- slug: flock-fd-inheritance-kills-cron-monitor -->
 
 ## 問題
 

@@ -1,6 +1,7 @@
 # CentOS 搬到 Ubuntu 後 cron 腳本被 dash 靜默打壞
 
 **日期：** 2026-10-02
+<!-- slug: centos-to-ubuntu-dash-breaks-cron-scripts -->
 
 ## 問題
 

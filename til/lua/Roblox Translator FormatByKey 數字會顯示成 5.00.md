@@ -1,6 +1,7 @@
 # Roblox Translator FormatByKey 數字會顯示成 5.00
 
 **日期：** 2026-10-04
+<!-- slug: roblox-translator-formatbykey-adds-decimals -->
 
 ## 問題
 

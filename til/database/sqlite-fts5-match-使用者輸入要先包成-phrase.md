@@ -1,6 +1,7 @@
 # SQLite FTS5 MATCH 的使用者輸入要先包成 phrase
 
 **日期：** 2026-09-30
+<!-- slug: sqlite-fts5-match-quote-user-input -->
 
 ## 問題
 

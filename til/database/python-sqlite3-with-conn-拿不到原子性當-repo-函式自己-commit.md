@@ -1,6 +1,7 @@
 # Python sqlite3 的 `with conn:` 拿不到原子性——當 repo 函式自己 commit
 
 **日期：** 2026-07-30
+<!-- slug: sqlite3-inner-commit-breaks-with-conn-atomicity -->
 
 ## 問題
 

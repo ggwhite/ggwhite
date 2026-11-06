@@ -1,6 +1,7 @@
 # Plash 桌布長時間播放多支影片卡死變黑，只能整個 Quit 重開救回
 
 **日期：** 2026-07-25
+<!-- slug: plash-wallpaper-video-freeze-needs-restart -->
 
 ## 問題
 

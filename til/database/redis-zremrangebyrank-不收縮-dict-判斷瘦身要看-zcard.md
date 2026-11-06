@@ -1,6 +1,7 @@
 # Redis ZREMRANGEBYRANK 不收縮 dict，判斷要不要瘦身一律看 ZCARD 不看 MEMORY USAGE
 
 **日期：** 2026-09-09
+<!-- slug: redis-zremrangebyrank-keeps-dict-size-use-zcard -->
 
 ## 問題
 

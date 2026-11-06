@@ -1,6 +1,7 @@
 # subprocess 讀 JSON 不能假設 stdout 只有 JSON
 
 **日期：** 2026-07-29
+<!-- slug: subprocess-stdout-may-not-be-pure-json -->
 
 ## 問題
 

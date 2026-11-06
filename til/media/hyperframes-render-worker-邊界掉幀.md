@@ -1,6 +1,7 @@
 # hyperframes render 多 worker 會在 worker 邊界掉幀
 
 **日期：** 2026-07-28
+<!-- slug: hyperframes-workers-drop-frames-at-boundaries -->
 
 ## 問題
 

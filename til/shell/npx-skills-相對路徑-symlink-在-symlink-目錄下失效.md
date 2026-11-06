@@ -1,6 +1,7 @@
 # npx skills 相對路徑 symlink 在 symlink 目錄下失效
 
 **日期：** 2026-09-30
+<!-- slug: npx-skills-relative-symlink-breaks-under-symlink -->
 
 ## 問題
 

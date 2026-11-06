@@ -1,6 +1,7 @@
 # claude -p 子行程限制 Read 權限，只有 --settings 的 deny 有效
 
 **日期：** 2026-08-03
+<!-- slug: claude-p-read-limits-only-deny-works -->
 
 ## 問題
 

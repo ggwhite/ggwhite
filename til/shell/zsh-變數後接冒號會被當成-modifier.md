@@ -1,6 +1,7 @@
 # zsh 變數後接冒號會被當成 modifier
 
 **日期：** 2026-10-23
+<!-- slug: zsh-colon-after-variable-is-a-modifier -->
 
 ## 問題
 

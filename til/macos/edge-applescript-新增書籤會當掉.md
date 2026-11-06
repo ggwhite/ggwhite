@@ -1,6 +1,7 @@
 # Edge AppleScript 新增書籤會讓 Edge 當掉
 
 **日期：** 2026-10-14
+<!-- slug: edge-applescript-add-bookmark-crashes -->
 
 ## 問題
 

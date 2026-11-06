@@ -1,6 +1,7 @@
 # LLM 工具回傳要把關鍵參數念回去
 
 **日期：** 2026-07-29
+<!-- slug: llm-tool-results-should-echo-key-params -->
 
 ## 問題
 

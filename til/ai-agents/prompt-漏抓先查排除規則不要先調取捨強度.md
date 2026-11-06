@@ -1,6 +1,7 @@
 # Prompt 漏抓時先查「是不是被某條排除規則主動擋掉」，不要先調取捨強度
 
 **日期：** 2026-07-30
+<!-- slug: prompt-misses-check-exclusion-rules-first -->
 
 ## 問題
 

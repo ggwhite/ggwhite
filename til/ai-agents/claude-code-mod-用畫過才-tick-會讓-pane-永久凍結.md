@@ -1,6 +1,7 @@
 # Claude Code mod：用「最近畫過才 tick」省重畫，會讓 pane 永久凍結
 
 **日期：** 2026-10-23
+<!-- slug: claude-code-mod-seen-gated-tick-freezes-pane -->
 
 ## 問題
 

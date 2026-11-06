@@ -1,6 +1,7 @@
 # Google News RSS 連結要解碼，不是轉址
 
 **日期：** 2026-11-03
+<!-- slug: google-news-rss-links-need-decoding -->
 
 ## 問題
 
