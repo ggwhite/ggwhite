@@ -8,7 +8,8 @@
 
 # 最新文章
 
-<!-- BLOG-POST-LIST:START -->- [Google News RSS 連結要解碼，不是轉址](https://ggwhite.github.io/ggwhite/posts/google-news-rss-%E9%80%A3%E7%B5%90%E8%A6%81%E8%A7%A3%E7%A2%BC-%E4%B8%8D%E6%98%AF%E8%BD%89%E5%9D%80/)
+<!-- BLOG-POST-LIST:START -->
+- [Google News RSS 連結要解碼，不是轉址](https://ggwhite.github.io/ggwhite/posts/google-news-rss-%E9%80%A3%E7%B5%90%E8%A6%81%E8%A7%A3%E7%A2%BC-%E4%B8%8D%E6%98%AF%E8%BD%89%E5%9D%80/)
 - [Browser agent: upload a local file when file_upload fails and CSP blocks localhost](https://ggwhite.github.io/ggwhite/posts/browser-agent-upload-local-file-past-csp/)
 - [配額有限的批次：便宜必要的工作要排在昂貴輪詢前面](https://ggwhite.github.io/ggwhite/posts/%E9%85%8D%E9%A1%8D%E6%9C%89%E9%99%90%E7%9A%84%E6%89%B9%E6%AC%A1-%E4%BE%BF%E5%AE%9C%E5%BF%85%E8%A6%81%E7%9A%84%E5%B7%A5%E4%BD%9C%E8%A6%81%E6%8E%92%E5%9C%A8%E6%98%82%E8%B2%B4%E8%BC%AA%E8%A9%A2%E5%89%8D%E9%9D%A2/)
 - [Claude Code mod：用「最近畫過才 tick」省重畫，會讓 pane 永久凍結](https://ggwhite.github.io/ggwhite/posts/claude-code-mod-%E7%94%A8%E7%95%AB%E9%81%8E%E6%89%8D-tick-%E6%9C%83%E8%AE%93-pane-%E6%B0%B8%E4%B9%85%E5%87%8D%E7%B5%90/)
