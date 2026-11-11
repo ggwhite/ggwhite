@@ -51,11 +51,11 @@
 ### 📝 Latest Posts
 
 <!-- BLOG-POST-LIST:START -->
+- [離屏錄製 SwiftUI 動畫要用慢動作](https://ggwhite.github.io/ggwhite/posts/smooth-offscreen-swiftui-recording-slow-motion/)
 - [Google News RSS 連結要解碼，不是轉址](https://ggwhite.github.io/ggwhite/posts/google-news-rss-links-need-decoding/)
 - [Browser agent: upload a local file when file_upload fails and CSP blocks localhost](https://ggwhite.github.io/ggwhite/posts/browser-agent-upload-local-file-past-csp/)
 - [配額有限的批次：便宜必要的工作要排在昂貴輪詢前面](https://ggwhite.github.io/ggwhite/posts/quota-batches-run-cheap-work-before-polling/)
 - [Claude Code mod：用「最近畫過才 tick」省重畫，會讓 pane 永久凍結](https://ggwhite.github.io/ggwhite/posts/claude-code-mod-seen-gated-tick-freezes-pane/)
-- [zsh 變數後接冒號會被當成 modifier](https://ggwhite.github.io/ggwhite/posts/zsh-colon-after-variable-is-a-modifier/)
 <!-- BLOG-POST-LIST:END -->
 
 ➡️ [All posts](https://ggwhite.github.io/ggwhite/)
