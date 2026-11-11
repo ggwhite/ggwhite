@@ -38,3 +38,7 @@ macOS app 用離屏視窗（offscreen window，不讓使用者看到）錄 READM
 - 錄不快就讓世界變慢：統一時間倍率比換截圖技術可靠，而且不用螢幕錄製權限、不用顯示視窗。
 - 量 webp 的 fps 不能數 frame 數：img2webp（WebPAnimEncoder）會把相同的連續影格合併成一格長 duration，數出來會嚴重低估。要從原始時間戳算。
 - 系統元件（`ProgressView` spinner）沒有速度參數，會在慢動作錄影裡快轉 4×，只能錄製時換掉或接受。
+
+## 補充：lossy animated webp 的「雜訊」
+
+慢動作錄好後，畫面上出現零星的暗色方塊，像雜訊。原始 TIFF 是乾淨的，問題在 `img2webp -lossy`：關鍵影格（key frame）之間只重送「變化超過門檻」的區塊，小誤差一格一格累積，靜止畫面就留下過時的方塊。`-exact`、`-sharp_yuv`、`-mixed` 都沒用；縮短關鍵影格間距才有效：`img2webp -kmin 2 -kmax 3 -sharp_yuv -lossy -q 80`，誤差 >24 的像素少 92%，代價是檔案約大 2 倍。
