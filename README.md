@@ -52,10 +52,10 @@
 
 <!-- BLOG-POST-LIST:START -->
 - [macOS CLI 迴圈中 frontmostApplication 不會更新](https://ggwhite.github.io/ggwhite/posts/macos-cli-%E8%BF%B4%E5%9C%88%E4%B8%AD-frontmostapplication-%E4%B8%8D%E6%9C%83%E6%9B%B4%E6%96%B0/)
+- [postToPid 送鍵會被注音輸入法吃掉，背景點擊送不到 Chromium](https://ggwhite.github.io/ggwhite/posts/posttopid-%E9%80%81%E9%8D%B5%E6%9C%83%E8%A2%AB%E6%B3%A8%E9%9F%B3%E8%BC%B8%E5%85%A5%E6%B3%95%E5%90%83%E6%8E%89-%E8%83%8C%E6%99%AF%E9%BB%9E%E6%93%8A%E9%80%81%E4%B8%8D%E5%88%B0-chromium/)
 - [instaloader 的 feedback_required 不一定是帳號被擋](https://ggwhite.github.io/ggwhite/posts/instaloader-feedback-required-is-per-query/)
 - [離屏錄製 SwiftUI 動畫要用慢動作](https://ggwhite.github.io/ggwhite/posts/smooth-offscreen-swiftui-recording-slow-motion/)
 - [Google News RSS 連結要解碼，不是轉址](https://ggwhite.github.io/ggwhite/posts/google-news-rss-links-need-decoding/)
-- [Browser agent: upload a local file when file_upload fails and CSP blocks localhost](https://ggwhite.github.io/ggwhite/posts/browser-agent-upload-local-file-past-csp/)
 <!-- BLOG-POST-LIST:END -->
 
 ➡️ [All posts](https://ggwhite.github.io/ggwhite/)
