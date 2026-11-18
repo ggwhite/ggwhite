@@ -9,11 +9,11 @@
 # 最新文章
 
 <!-- BLOG-POST-LIST:START -->
+- [macOS CLI 迴圈中 frontmostApplication 不會更新](https://ggwhite.github.io/ggwhite/posts/macos-cli-%E8%BF%B4%E5%9C%88%E4%B8%AD-frontmostapplication-%E4%B8%8D%E6%9C%83%E6%9B%B4%E6%96%B0/)
 - [instaloader 的 feedback_required 不一定是帳號被擋](https://ggwhite.github.io/ggwhite/posts/instaloader-feedback-required-is-per-query/)
 - [離屏錄製 SwiftUI 動畫要用慢動作](https://ggwhite.github.io/ggwhite/posts/smooth-offscreen-swiftui-recording-slow-motion/)
 - [Google News RSS 連結要解碼，不是轉址](https://ggwhite.github.io/ggwhite/posts/google-news-rss-links-need-decoding/)
 - [Browser agent: upload a local file when file_upload fails and CSP blocks localhost](https://ggwhite.github.io/ggwhite/posts/browser-agent-upload-local-file-past-csp/)
-- [配額有限的批次：便宜必要的工作要排在昂貴輪詢前面](https://ggwhite.github.io/ggwhite/posts/quota-batches-run-cheap-work-before-polling/)
 <!-- BLOG-POST-LIST:END -->
 
 ➡️ [全部文章](https://ggwhite.github.io/ggwhite/)
